@@ -2,9 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, emacs-overlay, nicpkgs, ... }:
-
-let niclib = nicpkgs.lib { inherit pkgs; }; in
+{ config, pkgs, emacs-overlay, npkgs, nlib, ... }:
 
 {
   imports =
@@ -29,8 +27,8 @@ let niclib = nicpkgs.lib { inherit pkgs; }; in
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_1;
 
   ## For realtek wifi
-  boot.extraModulePackages = [ nicpkgs.packages.x86_64-linux.rtw89 ];
-  hardware.firmware = [ nicpkgs.packages.x86_64-linux.rtw89-firmware ];
+  boot.extraModulePackages = [ npkgs.rtw89 ];
+  hardware.firmware = [ npkgs.rtw89-firmware ];
 
   # AMD PState
   boot.kernelModules = [ "amd_pstate" ];
@@ -117,11 +115,11 @@ let niclib = nicpkgs.lib { inherit pkgs; }; in
             cp /tmp/latest-screenshot.png ~/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
           fi
         '';
-        waybar = niclib.wrapDerivationOutput pkgs.waybar "bin/waybar" ''
+        waybar = nlib.wrapDerivationOutput pkgs.waybar "bin/waybar" ''
           --add-flags '--config ${./waybar-config}' \
           --add-flags '--style ${./waybar-style.css}'
         '';
-        kitty = niclib.wrapDerivationOutput pkgs.kitty "bin/kitty" ''
+        kitty = nlib.wrapDerivationOutput pkgs.kitty "bin/kitty" ''
           --add-flags '--config ${./kitty.conf}'
         '';
       in
@@ -296,14 +294,11 @@ let niclib = nicpkgs.lib { inherit pkgs; }; in
 
   # Apps
   environment.systemPackages =
-    let
-      kakoune = niclib.wrapDerivationOutput pkgs.kakoune "bin/kak" "--set KAKOUNE_CONFIG_DIR ${./kak}";
-    in
     with pkgs;
     [
       # dev
       man-pages man-pages-posix
-      vim nodejs kakoune gcc gdb gradle jdk
+      vim nodejs npkgs.kakoune gcc gdb gradle jdk
       ((emacsPackagesFor emacsPgtk).emacsWithPackages (epkgs: [epkgs.vterm])) ripgrep # direnv nix-direnv
       (pkgs.agda.withPackages (p: [ p.standard-library ]))
 

@@ -53,14 +53,16 @@
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixos1909": "nixos1909",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1677208240,
-        "narHash": "sha256-XuGL86sqLNzSgkGHMlbcGJrMO5DNIKzl4gkkAwpXVIs=",
+        "lastModified": 1677913745,
+        "narHash": "sha256-p97EZu/tL2WB4/ySH8Y0ZmzoWvgoee4SgSpfNuMxO+M=",
         "owner": "nicball",
         "repo": "nicpkgs",
-        "rev": "2de73f7a0c750bd55a2e750332a6cf05d702940c",
+        "rev": "b65ed7d7ec031eaa06089794efce9b3f616d8ce0",
         "type": "github"
       },
       "original": {
@@ -116,25 +118,11 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1677080879,
-        "narHash": "sha256-0SjW4/d3Rkw6C7hHZ5lxT4r6Pw9vzQb6Il6zYWwe2Bo=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f5dad40450d272a1ea2413f4a67ac08760649e89",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
     "root": {
       "inputs": {
         "emacs-overlay": "emacs-overlay",
         "nicpkgs": "nicpkgs",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },
