@@ -186,7 +186,7 @@ let niclib = nicpkgs.lib { inherit pkgs; }; in
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.clash}/bin/clash -f ${./clash-tag.yaml} -d /var/clash";
+      ExecStart = "${pkgs.clash}/bin/clash -f ${./private/clash-tag.yaml} -d /var/clash";
     };
   };
 
@@ -217,7 +217,7 @@ let niclib = nicpkgs.lib { inherit pkgs; }; in
 
     # Wireless
     wireless.enable = true;
-    wireless.networks = import ./wireless-networks.nix;
+    wireless.networks = import ./private/wireless-networks.nix;
     wireless.userControlled.enable = true; # allow wpa_cli to connect
   };
 

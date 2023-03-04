@@ -1,3 +1,2 @@
-clash*
 hardware-configuration.nix
-wireless-networks.nix
+private/
