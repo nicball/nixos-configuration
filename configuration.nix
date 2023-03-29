@@ -11,8 +11,8 @@
       ./cachix.nix
     ];
 
-  # HiDPI
-  hardware.video.hidpi.enable = true;
+  # services.mysql.enable = true;
+  # services.mysql.package = pkgs.mariadb;
 
   # Lenovo Thinkbook fixes
   ## Switch CapsLock and Left Ctrl
@@ -28,7 +28,7 @@
 
   ## For realtek wifi
   boot.extraModulePackages = [ npkgs.rtw89 ];
-  hardware.firmware = [ npkgs.rtw89-firmware ];
+  hardware.enableRedistributableFirmware = true;
 
   # AMD PState
   boot.kernelModules = [ "amd_pstate" ];
@@ -243,7 +243,7 @@
     createHome = false;
     home = "/home/nicball";
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "docker" "kvm" ];
+    extraGroups = [ "wheel" "docker" "kvm" "networkmanager" ];
     hashedPassword = "$6$2ftGKK8s43tQPi3E$joCjNfgJQjUH8Lq3MUVOTyHXrh4ANPvmdh7m/jCzCQR6ogpzteRIoY.pIHpC0pGlNd5biJAQOge2iZ7oBit.u/";
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCxtyU71qMEWzYBaa5aQzGCRlRsERuzc2sFshGA3tWewv3UfcZca27yQTGQnMCvqmObL4+zl0SikUTbQX7Pi4vo7U42EADdWJ4nHJ+/4kJ3s7xtYnlJAdkuS/fDZYsjDLxqEBMR5GCgtPvE8K2A3siBHW837J0fb8SuH7hUe0QnibCeHFPlNuY2OEAZBkUDsXhBz0jDd3D2rg7W1ALdHl+zFt+SimF4H0jOOssF893XfjXZw9C9DLbs0pKeWBJ8cMAf0ZSRFBcJMiiOqUbJQP0QyzVnwfJVX5WsAsebouClwK+tc7txX04BuJqefJbQ1t58cFFYwLQQKDCWwI5smNxqBVhjDSNf1i4ggmcIgaAnV6WWpV30+uObWWLQfox2zkNcxA0k6jkOfoJhkOjxRSFy588GNAstsXd6TgmaZI85RwAM1R9mO7FNrKGaEwpWjclaaml2/ZvnuaYW8mO0bySpYJPACk7O7hgj97BkJGlHdVixR9DSBnBVzHZ2ppQtsqM= nicball"
@@ -325,8 +325,8 @@
       libreoffice graphviz pandoc texlive.combined.scheme-full
 
       # games
-      lutris
-      # openttd minecraft fabric-installer mc
+      prismlauncher
+      # lutris openttd minecraft fabric-installer mc
     ];
 
   # Default Applications
