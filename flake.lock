@@ -58,11 +58,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1679301317,
-        "narHash": "sha256-a6lmbZQ4wfT2p2iOwd362X4UlaD8+wcRdlc6VeRWmK0=",
+        "lastModified": 1680332338,
+        "narHash": "sha256-VAQ+gRA/9PK15I6vUCOoyFwGvaGVvH9cxcJ5iAuVlfc=",
         "owner": "nicball",
         "repo": "nicpkgs",
-        "rev": "4ece8abf3701642891a45e868f43d245cc67d9db",
+        "rev": "dfd83977340425642bb4f47d472a6d6cfe0d8f6b",
         "type": "github"
       },
       "original": {

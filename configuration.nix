@@ -24,10 +24,10 @@
   '';
 
   ## For keyboard patch
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_1;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   ## For realtek wifi
-  boot.extraModulePackages = [ npkgs.rtw89 ];
+  boot.extraModulePackages = [ (npkgs.rtw89.override { kernel = config.boot.kernelPackages.kernel; }) ];
   hardware.enableRedistributableFirmware = true;
 
   # AMD PState
