@@ -160,28 +160,22 @@
       <alias>
         <family>sans-serif</family>
         <prefer>
+          <family>DejaVu Sans</family>
           <family>Source Han Sans SC</family>
-          <family>Source Han Sans TC</family>
-          <family>Source Han Sans HW</family>
-          <family>Source Han Sans K</family>
         </prefer>
       </alias>
       <alias>
         <family>monospace</family>
         <prefer>
+          <family>DejaVu Sans Mono</family>
           <family>Source Han Sans SC</family>
-          <family>Source Han Sans TC</family>
-          <family>Source Han Sans HW</family>
-          <family>Source Han Sans K</family>
         </prefer>
       </alias>
       <alias>
         <family>serif</family>
         <prefer>
+          <family>DejaVu Serif</family>
           <family>Source Han Serif SC</family>
-          <family>Source Han Serif TC</family>
-          <family>Source Han Serif HW</family>
-          <family>Source Han Serif K</family>
         </prefer>
       </alias>
     </fontconfig>
