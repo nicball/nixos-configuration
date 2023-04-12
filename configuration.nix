@@ -155,6 +155,37 @@
     mononoki
     julia-mono
   ];
+  fonts.fontconfig.localConf = ''
+    <fontconfig>
+      <alias>
+        <family>sans-serif</family>
+        <prefer>
+          <family>Source Han Sans SC</family>
+          <family>Source Han Sans TC</family>
+          <family>Source Han Sans HW</family>
+          <family>Source Han Sans K</family>
+        </prefer>
+      </alias>
+      <alias>
+        <family>monospace</family>
+        <prefer>
+          <family>Source Han Sans SC</family>
+          <family>Source Han Sans TC</family>
+          <family>Source Han Sans HW</family>
+          <family>Source Han Sans K</family>
+        </prefer>
+      </alias>
+      <alias>
+        <family>serif</family>
+        <prefer>
+          <family>Source Han Serif SC</family>
+          <family>Source Han Serif TC</family>
+          <family>Source Han Serif HW</family>
+          <family>Source Han Serif K</family>
+        </prefer>
+      </alias>
+    </fontconfig>
+  '';
 
   # Sound
   security.rtkit.enable = true;
