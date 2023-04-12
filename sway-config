@@ -225,7 +225,7 @@ bar {
 include /etc/sway/config.d/*
 
 bindsym $mod+c exec $browser
-bindsym $mod+Shift+f exec caja
+bindsym $mod+Shift+f exec nautilus
 bindsym Print exec screenshot
 bindsym Control+Print exec screenshot --full
 bindsym Shift+Print exec screenshot --save

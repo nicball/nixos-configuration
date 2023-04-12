@@ -24,11 +24,11 @@
   '';
 
   ## For keyboard patch
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   ## For realtek wifi
   boot.extraModulePackages = [ (npkgs.rtw89.override { kernel = config.boot.kernelPackages.kernel; }) ];
-  hardware.enableRedistributableFirmware = true;
+  # hardware.enableRedistributableFirmware = true;
 
   # AMD PState
   boot.kernelModules = [ "amd_pstate" ];
@@ -122,8 +122,19 @@
         kitty = nlib.wrapDerivationOutput pkgs.kitty "bin/kitty" ''
           --add-flags '--config ${./kitty.conf}'
         '';
-      in
-        [ screenshot pavucontrol kitty firefox dex swaylock dmenu waybar wl-clipboard mako gnome.adwaita-icon-theme swayimg ];
+      in [
+        # Utility
+        screenshot pavucontrol kitty firefox gnome.nautilus dex swaylock dmenu waybar wl-clipboard mako gnome.adwaita-icon-theme swayimg
+        # Video
+        vlc obs-studio tigervnc
+        # Document
+        libreoffice calibre 
+        # Messaging
+        tdesktop
+        # Game
+        prismlauncher
+        # lutris openttd minecraft fabric-installer mc
+      ];
     extraOptions = [ "'--config ${./sway-config}'" ];
   };
   xdg = {
@@ -305,28 +316,20 @@
       # i3
       # polybarFull xclip maim dmenu
 
-      # apps
-      mate.caja vlc
-      obs-studio clash tigervnc
-      calibre tdesktop
-
       # cli tools
-      file wget zip unzip neofetch jq screen unar pv rsync aria2 appimage-run
+      file wget zip unzip neofetch jq screen unar pv rsync aria2 appimage-run ffmpeg
 
       # system tools
+      clash cachix
       htop acpilight cpufrequtils parted lm_sensors sysstat usbutils pciutils smartmontools
       iw wirelesstools libva-utils vdpauinfo xdg-utils lsof traceroute dhcp iperf
-      radeontop powertop ryzenadj stress-ng
+      radeontop powertop stress-ng
 
       # emulators
       wineWowPackages.stable xorg.xhost qemu
 
       # documents
-      libreoffice graphviz pandoc texlive.combined.scheme-full
-
-      # games
-      prismlauncher
-      # lutris openttd minecraft fabric-installer mc
+      graphviz pandoc texlive.combined.scheme-full
     ];
 
   # Default Applications
