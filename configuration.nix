@@ -136,7 +136,14 @@
         prismlauncher
         # lutris openttd minecraft fabric-installer mc
       ];
-    extraOptions = [ "'--config ${./sway-config}'" ];
+    extraOptions =
+      let
+        sway-config = pkgs.substituteAll {
+            src = ./sway-config;
+            wallpaper = ./wallpaper.jpg;
+        };
+      in
+      [ "'--config ${sway-config}'" ];
   };
   xdg = {
     portal.wlr.enable = true;
