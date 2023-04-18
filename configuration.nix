@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, emacs-overlay, npkgs, nlib, ... }:
+{ config, pkgs, nicpkgs, niclib, ... }:
 
 {
   imports =
@@ -24,10 +24,10 @@
   '';
 
   ## For keyboard patch
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_1;
 
   ## For realtek wifi
-  boot.extraModulePackages = [ (npkgs.rtw89.override { kernel = config.boot.kernelPackages.kernel; }) ];
+  boot.extraModulePackages = [ (nicpkgs.rtw89.override { kernel = config.boot.kernelPackages.kernel; }) ];
   # hardware.enableRedistributableFirmware = true;
 
   # AMD PState
@@ -115,18 +115,19 @@
             cp /tmp/latest-screenshot.png ~/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
           fi
         '';
-        waybar = nlib.wrapDerivationOutput pkgs.waybar "bin/waybar" ''
+        waybar = niclib.wrapDerivationOutput pkgs.waybar "bin/waybar" ''
           --add-flags '--config ${./waybar-config}' \
           --add-flags '--style ${./waybar-style.css}'
         '';
-        kitty = nlib.wrapDerivationOutput pkgs.kitty "bin/kitty" ''
+        kitty = niclib.wrapDerivationOutput pkgs.kitty "bin/kitty" ''
           --add-flags '--config ${./kitty.conf}'
         '';
       in [
         # Utility
         screenshot pavucontrol kitty firefox gnome.nautilus dex swaylock dmenu waybar wl-clipboard mako gnome.adwaita-icon-theme swayimg
+        acpilight alsa-utils
         # Video
-        vlc obs-studio tigervnc
+        vlc obs-studio # tigervnc
         # Document
         libreoffice calibre 
         # Messaging
@@ -155,6 +156,7 @@
     mononoki
     julia-mono
   ];
+  # Prefer Simplified Chinese Fonts
   fonts.fontconfig.localConf = ''
     <fontconfig>
       <alias>
@@ -325,28 +327,25 @@
     };
   };
 
-  # Emacs
-  nixpkgs.overlays = [ emacs-overlay.overlay ];
-
   # Apps
   environment.systemPackages =
     with pkgs;
     [
       # dev
       man-pages man-pages-posix
-      vim nodejs npkgs.kakoune gcc gdb gradle jdk
-      ((emacsPackagesFor emacsPgtk).emacsWithPackages (epkgs: [epkgs.vterm])) ripgrep # direnv nix-direnv
-      (pkgs.agda.withPackages (p: [ p.standard-library ]))
+      nicpkgs.kakoune gcc gdb jdk
+      # nicpkgs.emacs ripgrep # direnv nix-direnv
+      # (pkgs.agda.withPackages (p: [ p.standard-library ]))
 
       # i3
       # polybarFull xclip maim dmenu
 
       # cli tools
-      file wget zip unzip neofetch jq screen unar pv rsync aria2 appimage-run ffmpeg
+      file wget zip unzip neofetch jq screen unar pv rsync aria2 ffmpeg
 
       # system tools
       clash cachix
-      htop acpilight cpufrequtils parted lm_sensors sysstat usbutils pciutils smartmontools
+      htop cpufrequtils parted lm_sensors sysstat usbutils pciutils smartmontools
       iw wirelesstools libva-utils vdpauinfo xdg-utils lsof traceroute dhcp iperf
       radeontop powertop stress-ng
 
@@ -354,7 +353,7 @@
       wineWowPackages.stable xorg.xhost qemu
 
       # documents
-      graphviz pandoc texlive.combined.scheme-full
+      graphviz pandoc # texlive.combined.scheme-full
     ];
 
   # Default Applications
@@ -368,9 +367,10 @@
   virtualisation.docker.daemon.settings = { registry-mirrors = [ "https://docker.mirrors.ustc.edu.cn/" ]; };
 
   # Nix flakes
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    auto-optimise-store = true;
+  };
   nix.package = pkgs.nixUnstable;
 
   # Select internationalisation properties.

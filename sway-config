@@ -232,12 +232,17 @@ bindsym Shift+Print exec screenshot --save
 bindsym Control+Shift+Print exec screenshot --full --save
 bindsym $mod+g exec env -u http_proxy -u https_proxy steam
 bindsym $mod+alt+l exec swaylock
+bindcode 121 exec amixer sset Master 0%
+bindcode 122 exec amixer sset Master 5%-
+bindcode 123 exec amixer sset Master 5%+
+bindcode 232 exec sudo xbacklight -5
+bindcode 233 exec sudo xbacklight +5
 # Theme colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #002b36 #93a1a1 #eee8d5 #002b36 #002b36
-client.focused_inactive #002b36 #93a1a1 #eee8d5 #002b36 #002b36
-client.unfocused        #002b36 #657b83 #eee8d5 #002b36 #002b36
-client.urgent           #002b36 #657b83 #eee8d5 #002b36 #FF0000
+client.focused          #002b36 #93a1a1 #eee8d5 #93a1a1 #002b36
+client.focused_inactive #002b36 #93a1a1 #eee8d5 #93a1a1 #002b36
+client.unfocused        #002b36 #001d26 #586e75 #93a1a1 #002b36
+client.urgent           #002b36 #657b83 #eee8d5 #93a1a1 #FF0000
 # hide_edge_borders --i3 both
 default_border pixel
 # gaps inner 2
