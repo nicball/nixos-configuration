@@ -11,6 +11,9 @@
       ./cachix.nix
     ];
 
+  # Flatpak
+  services.flatpak.enable = true;
+
   # services.mysql.enable = true;
   # services.mysql.package = pkgs.mariadb;
 
@@ -87,54 +90,23 @@
     extraPackages =
       with pkgs;
       let
-        screenshot = writeShellScriptBin "screenshot" ''
-          fullscreen=false
-          savetohome=false
-          for i; do
-            case "$i" in
-              --full)
-                fullscreen=true
-                ;;
-              --save)
-                savetohome=true
-                ;;
-            esac
-          done
-          if $fullscreen; then
-            ${grim}/bin/grim /tmp/latest-screenshot.png
-          else
-            file=$(mktemp /tmp/XXXXXXXXXXX-screenshot.png)
-            ${grim}/bin/grim $file
-            read w h x y < <(${slurp}/bin/slurp -f "%w %h %x %y")
-            ${imagemagick}/bin/convert $file -crop $((w*3/2))x$((h*3/2))+$((x*3/2))+$((y*3/2)) /tmp/latest-screenshot.png
-            rm $file
-          fi
-          wl-copy --type image/png < /tmp/latest-screenshot.png
-          if $savetohome; then
-            mkdir -p ~/screenshots
-            cp /tmp/latest-screenshot.png ~/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
-          fi
-        '';
         waybar = niclib.wrapDerivationOutput pkgs.waybar "bin/waybar" ''
           --add-flags '--config ${./waybar-config}' \
           --add-flags '--style ${./waybar-style.css}'
         '';
-        kitty = niclib.wrapDerivationOutput pkgs.kitty "bin/kitty" ''
-          --add-flags '--config ${./kitty.conf}'
-        '';
       in [
         # Utility
-        screenshot pavucontrol kitty firefox gnome.nautilus dex swaylock dmenu waybar wl-clipboard mako gnome.adwaita-icon-theme swayimg
-        acpilight alsa-utils
+        (nicpkgs.screenshot.override { scale = "3/2"; }) pavucontrol nicpkgs.kitty firefox
+        gnome.nautilus dex swaylock dmenu waybar wl-clipboard mako
+        gnome.adwaita-icon-theme swayimg acpilight alsa-utils
         # Video
-        vlc obs-studio # tigervnc
+        mpv obs-studio # tigervnc
         # Document
         libreoffice calibre 
         # Messaging
         tdesktop
         # Game
-        prismlauncher
-        # lutris openttd minecraft fabric-installer mc
+        # prismlauncher lutris openttd minecraft fabric-installer mc
       ];
     extraOptions =
       let
@@ -378,7 +350,7 @@
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
   };
-  nix.package = pkgs.nixUnstable;
+  # nix.package = pkgs.nixUnstable;
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";

@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "battery#bat2", "clock", "tray"],
+    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "battery#bat2", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -78,7 +78,8 @@
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click-right": "sudo rfkill toggle wifi",
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -97,6 +98,14 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "on-click-right": "sudo rfkill toggle bluetooth",
+    },
+    "backlight": {
+        // "device": "intel_backlight",
+        "format": "{percent}% {icon}",
+        "format-icons": "\uf185",
+        "on-scroll-up": "sudo xbacklight +5",
+        "on-scroll-down": "sudo xbacklight -5",
     },
 }

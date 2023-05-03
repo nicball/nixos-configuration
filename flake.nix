@@ -1,10 +1,9 @@
 {
   inputs = {
-    # nixpkgs.url = "nixpkgs/nixos-22.11";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     nicpkgs = {
       url = "github:nicball/nicpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-latest.follows = "nixpkgs";
     };
   };
   outputs = { self, nixpkgs, nicpkgs, ... }: {
@@ -12,7 +11,7 @@
       system = "x86_64-linux";
       modules = [ ./configuration.nix ];
       specialArgs = {
-        niclib = nicpkgs.lib.${system};
+        niclib = nicpkgs.niclib.${system};
         nicpkgs = nicpkgs.packages.${system};
       };
     };
