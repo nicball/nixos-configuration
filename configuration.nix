@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, nicpkgs, niclib, ... }:
+{ config, pkgs, lib, nicpkgs, niclib, ... }:
 
 {
   imports =
@@ -10,6 +10,18 @@
       ./hardware-configuration.nix
       ./cachix.nix
     ];
+
+
+  # # Use the systemd-boot EFI boot loader.
+  # boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  # Secure boot
+  boot.bootspec.enable = true;
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
 
   # Flatpak
   services.flatpak.enable = true;
@@ -97,7 +109,7 @@
       in [
         # Utility
         (nicpkgs.screenshot.override { scale = "3/2"; }) pavucontrol nicpkgs.kitty firefox
-        gnome.nautilus dex swaylock dmenu waybar wl-clipboard mako
+        gnome.nautilus dex swaylock rofi-wayland waybar wl-clipboard mako
         gnome.adwaita-icon-theme swayimg acpilight alsa-utils
         # Video
         mpv obs-studio # tigervnc
@@ -106,7 +118,7 @@
         # Messaging
         tdesktop
         # Game
-        # prismlauncher lutris openttd minecraft fabric-installer mc
+        prismlauncher # lutris openttd minecraft fabric-installer mc
       ];
     extraOptions =
       let
@@ -186,10 +198,6 @@
   # Steam
   programs.steam.enable = true;
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   # Time zone
   time.timeZone = "Asia/Shanghai";
   # Compatible with Windows
@@ -236,10 +244,10 @@
     wireless.userControlled.enable = true; # allow wpa_cli to connect
   };
 
-  services.zerotierone = {
-    enable = true;
-    joinNetworks = [ "8286ac0e47b1e8e6" ];
-  };
+  # services.zerotierone = {
+  #   enable = true;
+  #   joinNetworks = [ "8286ac0e47b1e8e6" ];
+  # };
 
   # services.samba = {
   #   enable = true;
@@ -320,7 +328,7 @@
       # polybarFull xclip maim dmenu
 
       # cli tools
-      file wget zip unzip neofetch jq screen unar pv rsync aria2 ffmpeg
+      file wget zip unzip neofetch jq screen unar pv rsync nicpkgs.aria2 ffmpeg
 
       # system tools
       clash cachix
@@ -339,6 +347,9 @@
   environment.variables = {
       EDITOR = "kak";
       BROWSER = "firefox";
+  };
+  xdg.mime.defaultApplications = {
+    "application/epub+zip" = "calibre-ebook-viewer.desktop";
   };
 
   # Docker

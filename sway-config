@@ -19,7 +19,7 @@ set $term kitty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu dmenu_run | xargs swaymsg exec --
+set $menu rofi -show combi -modes combi -combi-modes 'drun,run' -run-command 'swaymsg exec -- {cmd}'
 set $browser firefox
 
 ### Output configuration
@@ -62,6 +62,7 @@ output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_19
 
     input type:pointer {
         accel_profile flat
+        pointer_accel -0.3
         # scroll_factor 2
     }
 
@@ -87,7 +88,7 @@ output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_19
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -230,7 +231,7 @@ bindsym Print exec screenshot
 bindsym Control+Print exec screenshot --full
 bindsym Shift+Print exec screenshot --save
 bindsym Control+Shift+Print exec screenshot --full --save
-bindsym $mod+g exec env -u http_proxy -u https_proxy steam
+bindsym $mod+alt+g exec env -u http_proxy -u https_proxy steam
 bindsym $mod+alt+l exec swaylock
 bindcode 121 exec amixer sset Master 0%
 bindcode 122 exec amixer sset Master 5%-
