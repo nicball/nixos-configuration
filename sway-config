@@ -188,11 +188,11 @@ output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_19
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+Shift+Escape move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+Escape scratchpad show
 #
 # Resizing containers:
 #
@@ -233,11 +233,17 @@ bindsym Shift+Print exec screenshot --save
 bindsym Control+Shift+Print exec screenshot --full --save
 bindsym $mod+alt+g exec env -u http_proxy -u https_proxy steam
 bindsym $mod+alt+l exec swaylock
-bindcode 121 exec amixer sset Master 0%
-bindcode 122 exec amixer sset Master 5%-
-bindcode 123 exec amixer sset Master 5%+
+bindcode 121       exec amixer sset Master 0%
+bindcode 122       exec amixer sset Master 5%-
+bindsym $mod+minus exec amixer sset Master 5%-
+bindcode 123       exec amixer sset Master 5%+
+bindsym $mod+equal exec amixer sset Master 5%+
 bindcode 232 exec sudo xbacklight -5
 bindcode 233 exec sudo xbacklight +5
+bindsym $mod+t input type:touchpad events disabled
+bindsym $mod+Shift+t input type:touchpad events enabled
+bindsym $mod+y input 1:1:AT_Translated_Set_2_keyboard events disabled
+bindsym $mod+Shift+y input 1:1:AT_Translated_Set_2_keyboard events enabled
 # Theme colors
 # class                 border  backgr. text    indicator child_border
 client.focused          #002b36 #93a1a1 #eee8d5 #93a1a1 #002b36
