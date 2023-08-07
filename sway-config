@@ -246,10 +246,10 @@ bindsym $mod+y input 1:1:AT_Translated_Set_2_keyboard events disabled
 bindsym $mod+Shift+y input 1:1:AT_Translated_Set_2_keyboard events enabled
 # Theme colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #002b36 #93a1a1 #eee8d5 #93a1a1 #002b36
-client.focused_inactive #002b36 #93a1a1 #eee8d5 #93a1a1 #002b36
-client.unfocused        #002b36 #001d26 #586e75 #93a1a1 #002b36
-client.urgent           #002b36 #657b83 #eee8d5 #93a1a1 #FF0000
+client.focused          #3b4252 #4c566a #eceff4 #81a1c1 #3b4252
+client.focused_inactive #3b4252 #4c566a #eceff4 #81a1c1 #3b4252
+client.unfocused        #3b4252 #434c5e #d8dee9 #81a1c1 #3b4252
+client.urgent           #3b4252 #bf616a #eceff4 #81a1c1 #3b4252
 # hide_edge_borders --i3 both
 default_border pixel
 # gaps inner 2

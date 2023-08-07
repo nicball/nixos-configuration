@@ -50,6 +50,7 @@
   boot.kernelParams = [
     "initcall_blacklist=acpi_cpufreq_init"
     "amd_pstate=passive"
+    "iomem=relaxed"
   ];
 
   # Try GNOME

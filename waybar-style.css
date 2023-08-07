@@ -2,19 +2,18 @@
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 11px;
-    color: #eee8d5;
+    /* color: #2e3440; */
+    color: #eceff4;
 }
 
 window#waybar {
     /*
-    background-color: #1e1e20;
-    color: #c5c8c6;
     transition-property: background-color;
     transition-duration: .5s;
     */
-    /* background-color: #333333; */
     /* border-bottom: 1px solid @unfocused_borders; */
-    background: #002b36;
+    /* background: #d8dee9; */
+    background: #3b4252;
 }
 
 window#waybar.hidden {
@@ -136,8 +135,7 @@ button:hover {
 */
 
 #battery.charging, #battery.plugged {
-    /* background-color: #26A65B; */
-    background-color: green;
+    background-color: #a3be8c;
 }
 
 @keyframes blink {
@@ -148,8 +146,7 @@ button:hover {
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+    background-color: #bf616a;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
