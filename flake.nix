@@ -8,7 +8,7 @@
     lanzaboote.url = "github:nix-community/lanzaboote";
   };
   outputs = { self, nixpkgs, nicpkgs, lanzaboote, ... }: {
-    nixosConfigurations.nicball-nixos = nixpkgs.lib.nixosSystem rec {
+    nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
       modules = [
         ./configuration.nix

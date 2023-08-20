@@ -216,7 +216,7 @@
 
   # Network
   networking = {
-    hostName = "nicball-nixos";
+    hostName = "nixos-laptop";
 
     proxy.httpProxy = "http://127.0.0.1:7890";
     proxy.httpsProxy = "http://127.0.0.1:7890";
@@ -321,7 +321,7 @@
     [
       # dev
       man-pages man-pages-posix
-      nicpkgs.kakoune gcc gdb jdk
+      nicpkgs.kakoune gcc gdb jdk gnumake
       # nicpkgs.emacs ripgrep # direnv nix-direnv
       # (pkgs.agda.withPackages (p: [ p.standard-library ]))
 
@@ -335,7 +335,7 @@
       clash cachix
       htop cpufrequtils parted lm_sensors sysstat usbutils pciutils smartmontools
       iw wirelesstools libva-utils vdpauinfo xdg-utils lsof traceroute dhcp iperf
-      radeontop powertop stress-ng
+      ryzenadj radeontop powertop stress-ng
 
       # emulators
       wineWowPackages.stable xorg.xhost qemu
