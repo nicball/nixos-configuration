@@ -1,11 +1,10 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nicpkgs = {
-      url = "github:nicball/nicpkgs";
+    nicpkgs.url = "github:nicball/nicpkgs";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lanzaboote.url = "github:nix-community/lanzaboote";
   };
   outputs = { self, nixpkgs, nicpkgs, lanzaboote, ... }: {
     nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem rec {

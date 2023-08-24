@@ -21,6 +21,7 @@
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/etc/secureboot";
+    configurationLimit = 10;
   };
 
   # Flatpak
@@ -141,7 +142,7 @@
   };
 
   # Fonts
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     source-han-sans source-han-serif
     source-code-pro
     font-awesome_5
@@ -210,7 +211,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.clash}/bin/clash -f ${./private/clash-tag.yaml} -d /var/clash";
+      ExecStart = "${pkgs.clash}/bin/clash -f ${./private/clash-tag.yaml} -d /var/clash > /dev/null 2>&1";
     };
   };
 
@@ -334,7 +335,7 @@
       # system tools
       clash cachix
       htop cpufrequtils parted lm_sensors sysstat usbutils pciutils smartmontools
-      iw wirelesstools libva-utils vdpauinfo xdg-utils lsof traceroute dhcp iperf
+      iw wirelesstools libva-utils vdpauinfo xdg-utils lsof traceroute iperf
       ryzenadj radeontop powertop stress-ng
 
       # emulators
