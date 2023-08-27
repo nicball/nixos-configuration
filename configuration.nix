@@ -108,10 +108,11 @@
           --add-flags '--config ${./waybar-config}' \
           --add-flags '--style ${./waybar-style.css}'
         '';
+        rofi = niclib.wrapDerivationOutput pkgs.rofi-wayland "bin/rofi" "--add-flags '-theme ${./rofi.rasi}'";
       in [
         # Utility
         (nicpkgs.screenshot.override { scale = "3/2"; }) pavucontrol nicpkgs.kitty firefox
-        gnome.nautilus dex swaylock rofi-wayland waybar wl-clipboard mako
+        gnome.nautilus dex swaylock rofi waybar wl-clipboard mako
         gnome.adwaita-icon-theme swayimg acpilight alsa-utils
         # Multimedia
         mpv obs-studio # tigervnc

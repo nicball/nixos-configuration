@@ -257,8 +257,11 @@ default_border pixel
 font "Source Han Sans SC" 11
 for_window [title="Volume Control"] floating enable
 # for_window [title="Telegram \(\d*\)"] floating enable
-output eDP-1 scale 1.5
-output eDP-1 background @wallpaper@ tile
+output eDP-1 {
+    scale 1.5
+    background @wallpaper@ tile
+    adaptive_sync on
+}
 bindswitch --reload --locked lid:on output eDP-1 dpms off
 bindswitch --reload --locked lid:off output eDP-1 dpms on
 # workspace_auto_back_and_forth yes
