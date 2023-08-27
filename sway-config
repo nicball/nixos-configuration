@@ -252,8 +252,9 @@ client.unfocused        #3b4252 #434c5e #d8dee9 #81a1c1 #3b4252
 client.urgent           #3b4252 #bf616a #eceff4 #81a1c1 #3b4252
 # hide_edge_borders --i3 both
 default_border pixel
-# gaps inner 2
-# smart_gaps on
+gaps inner 4
+smart_gaps on
+smart_borders no_gaps
 font "Source Han Sans SC" 11
 for_window [title="Volume Control"] floating enable
 # for_window [title="Telegram \(\d*\)"] floating enable

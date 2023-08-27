@@ -128,7 +128,7 @@
       let
         sway-config = pkgs.substituteAll {
             src = ./sway-config;
-            wallpaper = ./wallpaper.jpg;
+            wallpaper = ./wallpaper.png;
         };
       in
       [ "'--config ${sway-config}'" ];
