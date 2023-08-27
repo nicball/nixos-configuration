@@ -246,15 +246,15 @@ bindsym $mod+y input 1:1:AT_Translated_Set_2_keyboard events disabled
 bindsym $mod+Shift+y input 1:1:AT_Translated_Set_2_keyboard events enabled
 # Theme colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #3b4252 #4c566a #eceff4 #81a1c1 #3b4252
-client.focused_inactive #3b4252 #4c566a #eceff4 #81a1c1 #3b4252
-client.unfocused        #3b4252 #434c5e #d8dee9 #81a1c1 #3b4252
-client.urgent           #3b4252 #bf616a #eceff4 #81a1c1 #3b4252
+client.focused          #3b4252 #4c566a #eceff4 #5e81ac #5e81ac
+client.focused_inactive #3b4252 #4c566a #eceff4 #3b4252 #3b4252
+client.unfocused        #3b4252 #434c5e #d8dee9 #3b4252 #3b4252
+client.urgent           #3b4252 #bf616a #eceff4 #3b4252 #bf616a
 # hide_edge_borders --i3 both
 default_border pixel
 gaps inner 4
-smart_gaps on
-smart_borders no_gaps
+# smart_gaps on
+smart_borders on
 font "Source Han Sans SC" 11
 for_window [title="Volume Control"] floating enable
 # for_window [title="Telegram \(\d*\)"] floating enable
