@@ -40,7 +40,7 @@
   '';
 
   ## For keyboard patch
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_1;
+  boot.kernelPackages = pkgs.linuxPackages_6_4;
 
   ## For realtek wifi
   boot.extraModulePackages = [ (nicpkgs.rtw89.override { kernel = config.boot.kernelPackages.kernel; }) ];
@@ -50,7 +50,7 @@
   boot.kernelModules = [ "amd_pstate" ];
   boot.kernelParams = [
     "initcall_blacklist=acpi_cpufreq_init"
-    "amd_pstate=passive"
+    "amd_pstate=active"
     "iomem=relaxed"
   ];
 
@@ -113,8 +113,9 @@
         (nicpkgs.screenshot.override { scale = "3/2"; }) pavucontrol nicpkgs.kitty firefox
         gnome.nautilus dex swaylock rofi-wayland waybar wl-clipboard mako
         gnome.adwaita-icon-theme swayimg acpilight alsa-utils
-        # Video
+        # Multimedia
         mpv obs-studio # tigervnc
+        yesplaymusic
         # Document
         libreoffice calibre 
         # Messaging
