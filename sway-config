@@ -253,14 +253,14 @@ client.urgent           #3b4252 #bf616a #eceff4 #3b4252 #bf616a
 # hide_edge_borders --i3 both
 default_border pixel
 gaps inner 6
-# smart_gaps on
+smart_gaps on
 smart_borders on
 font "Source Han Sans SC" 11
 for_window [title="Volume Control"] floating enable
 # for_window [title="Telegram \(\d*\)"] floating enable
 output eDP-1 {
     scale 1.5
-    background @wallpaper@ tile
+    background @wallpaper@ stretch
     adaptive_sync on
 }
 bindswitch --reload --locked lid:on output eDP-1 dpms off

@@ -40,7 +40,7 @@
   '';
 
   ## For keyboard patch
-  boot.kernelPackages = pkgs.linuxPackages_6_4;
+  boot.kernelPackages = pkgs.linuxPackages_6_5;
 
   ## For realtek wifi
   boot.extraModulePackages = [ (nicpkgs.rtw89.override { kernel = config.boot.kernelPackages.kernel; }) ];
@@ -51,7 +51,7 @@
   boot.kernelParams = [
     "initcall_blacklist=acpi_cpufreq_init"
     "amd_pstate=active"
-    "iomem=relaxed"
+    "iomem=relaxed" # for ryzenadj
   ];
 
   # Try GNOME
@@ -101,29 +101,6 @@
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
-    extraPackages =
-      with pkgs;
-      let
-        waybar = niclib.wrapDerivationOutput pkgs.waybar "bin/waybar" ''
-          --add-flags '--config ${./waybar-config}' \
-          --add-flags '--style ${./waybar-style.css}'
-        '';
-        rofi = niclib.wrapDerivationOutput pkgs.rofi-wayland "bin/rofi" "--add-flags '-theme ${./rofi.rasi}'";
-      in [
-        # Utility
-        (nicpkgs.screenshot.override { scale = "3/2"; }) pavucontrol nicpkgs.kitty firefox
-        gnome.nautilus dex swaylock rofi waybar wl-clipboard mako
-        gnome.adwaita-icon-theme swayimg acpilight alsa-utils
-        # Multimedia
-        mpv obs-studio # tigervnc
-        yesplaymusic
-        # Document
-        libreoffice calibre 
-        # Messaging
-        tdesktop
-        # Game
-        prismlauncher # lutris openttd minecraft fabric-installer mc
-      ];
     extraOptions =
       let
         sway-config = pkgs.substituteAll {
@@ -213,7 +190,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.clash}/bin/clash -f ${./private/clash-tag.yaml} -d /var/clash > /dev/null 2>&1";
+      ExecStart = "${pkgs.clash}/bin/clash -f ${./private/clash.yaml} -d /var/clash > /dev/null 2>&1";
     };
   };
 
@@ -336,13 +313,33 @@
       clash cachix
       htop cpufrequtils parted lm_sensors sysstat usbutils pciutils smartmontools
       iw wirelesstools libva-utils vdpauinfo xdg-utils lsof traceroute iperf
-      ryzenadj radeontop powertop stress-ng
+      nicpkgs.ryzenadj radeontop powertop stress-ng
 
       # emulators
       wineWowPackages.stable xorg.xhost qemu
 
       # documents
       graphviz pandoc # texlive.combined.scheme-full
+
+      # GUI stuff
+
+      ## Utility
+      (nicpkgs.screenshot.override { scale = "3/2"; }) pavucontrol nicpkgs.kitty firefox
+      gnome.nautilus dex swaylock nicpkgs.rofi nicpkgs.waybar wl-clipboard mako
+      gnome.adwaita-icon-theme swayimg acpilight alsa-utils
+
+      ## Multimedia
+      mpv obs-studio # tigervnc
+      yesplaymusic
+
+      ## Document
+      libreoffice calibre
+
+      ## Messaging
+      tdesktop
+
+      ## Game
+      prismlauncher # lutris openttd minecraft fabric-installer
     ];
 
   # Default Applications
