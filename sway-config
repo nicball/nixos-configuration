@@ -274,8 +274,6 @@ bindsym $mod+p mode passthru
 
 # auto start programs
 exec "dex -a"
-workspace 4
-exec telegram-desktop
 workspace 2
 exec $browser
 workspace 1

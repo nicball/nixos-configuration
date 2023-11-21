@@ -30,9 +30,8 @@
   # services.mysql.enable = true;
   # services.mysql.package = pkgs.mariadb;
 
-  # Lenovo Thinkbook fixes
-  ## Switch CapsLock and Left Ctrl
-  ### evdev:atkbd:dmi:bvnLENOVO:bvrJ6CN40WW:bd*:svnLENOVO:pn21D1:pvr*:*
+  # Switch CapsLock and Left Ctrl
+  ## evdev:atkbd:dmi:bvnLENOVO:bvrJ6CN40WW:bd*:svnLENOVO:pn21D1:pvr*:*
   services.udev.extraHwdb = ''
     evdev:atkbd:*
      KEYBOARD_KEY_3a=leftctrl
@@ -47,6 +46,7 @@
   # hardware.enableRedistributableFirmware = true;
 
   # AMD PState
+  powerManagement.cpuFreqGovernor = "powersave";
   boot.kernelModules = [ "amd_pstate" ];
   boot.kernelParams = [
     "initcall_blacklist=acpi_cpufreq_init"
@@ -334,9 +334,6 @@
 
       ## Document
       libreoffice calibre
-
-      ## Messaging
-      tdesktop
 
       ## Game
       prismlauncher # lutris openttd minecraft fabric-installer
