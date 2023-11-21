@@ -53,6 +53,24 @@
     "amd_pstate=active"
     "iomem=relaxed" # for ryzenadj
   ];
+  services.acpid = {
+    enable = true;
+    acEventCommands = ''
+      vals=($1)
+      case ''${vals[3]} in
+        00000000)
+          for i in /sys/devices/system/cpu/cpufreq/policy*; do
+            echo power > $i/energy_performance_preference
+          done
+        ;;
+        00000001)
+          for i in /sys/devices/system/cpu/cpufreq/policy*; do
+            echo performance > $i/energy_performance_preference
+          done
+        ;;
+      esac
+    '';
+  };
 
   # Try GNOME
   # services.xserver = {
