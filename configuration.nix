@@ -71,43 +71,27 @@
       esac
     '';
   };
-
-  # Try GNOME
-  # services.xserver = {
-  #   enable = true;
-  #   desktopManager.gnome.enable = true;
-  #   displayManager.gdm.enable = true;
-  # };
-
-  # GPU passthrough
-  # boot.kernelPackages = pkgs.linuxPackages_5_10;
-  # boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
-  # boot.initrd.kernelModules = [ "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
-  # boot.initrd.kernelModules = [ "vfio_iommu_type1" "kvmgt" "mdev" ];
-  # boot.blacklistedKernelModules = [ "nvidia" "nouveau" ];
-  #   options vfio-pci ids=10de:1c8c,10de:0fb9
-  boot.extraModprobeConfig = ''
-    options kvm ignore_msrs=1
-  '';
-  #   options kvm_intel nested=1
-  #   options kvm_intel emulate_invalid_guest_state=0
-  # boot.extraModprobeConfig = "options i915 enable_gvt=1";
-  # services.udev.extraRules = ''SUBSYSTEM=="vfio", OWNER="root", GROUP="kvm"'';
-  # security.pam.loginLimits = [
-  #   {
-  #     domain = "@kvm";
-  #     type = "soft";
-  #     item = "memlock";
-  #     value = "unlimited";
-  #   }
-  #   {
-  #     domain = "@kvm";
-  #     type = "hard";
-  #     item = "memlock";
-  #     value = "unlimited";
-  #   }
-  # ];
-  # virtualisation.libvirtd.enable = true;
+  systemd.services.auto-set-epp =
+    let script = pkgs.writeShellScript "auto-set-epp.sh" ''
+      if ${pkgs.acpi}/bin/acpi -a | grep off-line > /dev/null; then
+        for i in /sys/devices/system/cpu/cpufreq/policy*; do
+          echo power > $i/energy_performance_preference
+        done
+      else
+        for i in /sys/devices/system/cpu/cpufreq/policy*; do
+          echo performance > $i/energy_performance_preference
+        done
+      fi
+    '';
+    in {
+      description = "Automatically set AMD PState EPP on startup";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "cpufreq.service" ];
+      serviceConfig = {
+        ExecStart = script;
+        Type = "oneshot";
+      };
+    };
 
   # NTFS support
   boot.supportedFilesystems = [ "ntfs" ];
