@@ -149,11 +149,11 @@
         "nur": "nur"
       },
       "locked": {
-        "lastModified": 1698327493,
-        "narHash": "sha256-QesAVx6THWLbEBQvwX3YDw1s1DiQshz4jZx3SpJAEss=",
+        "lastModified": 1700919559,
+        "narHash": "sha256-j5Gsrl2cfby4lQhgEyu4YvqJl3QIC1svaIVD0W9dkX4=",
         "owner": "nicball",
         "repo": "nicpkgs",
-        "rev": "c234a564717f9c0eb88c48226896a72e9d074489",
+        "rev": "0053274c55959f839c7cb9585039582c174fc47a",
         "type": "github"
       },
       "original": {

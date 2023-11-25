@@ -326,8 +326,8 @@
       # GUI stuff
 
       ## Utility
-      (nicpkgs.screenshot.override { scale = "3/2"; }) pavucontrol nicpkgs.kitty firefox
-      gnome.nautilus dex swaylock nicpkgs.rofi nicpkgs.waybar wl-clipboard mako
+      nicpkgs.screenshot pavucontrol nicpkgs.kitty firefox
+      gnome.nautilus dex swaylock nicpkgs.rofi nicpkgs.waybar wl-clipboard nicpkgs.mako
       gnome.adwaita-icon-theme swayimg acpilight alsa-utils
 
       ## Multimedia
@@ -345,6 +345,7 @@
   environment.variables = {
       EDITOR = "kak";
       BROWSER = "firefox";
+      QT_WAYLAND_FORCE_DPI = "144";
   };
   xdg.mime.defaultApplications = {
     "application/epub+zip" = "calibre-ebook-viewer.desktop";

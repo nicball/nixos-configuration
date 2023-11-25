@@ -231,7 +231,7 @@ bindsym Print exec screenshot
 bindsym Control+Print exec screenshot --full
 bindsym Shift+Print exec screenshot --save
 bindsym Control+Shift+Print exec screenshot --full --save
-bindsym $mod+alt+g exec env -u http_proxy -u https_proxy steam
+bindsym $mod+alt+g exec env -u http_proxy -u https_proxy steam -forcedesktopscaling 1.5
 bindsym $mod+alt+l exec swaylock
 bindcode 121       exec amixer sset Master 0%
 bindcode 122       exec amixer sset Master 5%-
@@ -259,7 +259,7 @@ font "Source Han Sans SC" 11
 for_window [title="Volume Control"] floating enable
 # for_window [title="Telegram \(\d*\)"] floating enable
 output eDP-1 {
-    scale 1.5
+    # scale 1.5
     background @wallpaper@ stretch
     adaptive_sync on
 }
