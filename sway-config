@@ -255,9 +255,10 @@ default_border pixel
 gaps inner 6
 smart_gaps on
 smart_borders on
-font "Source Han Sans SC" 11
+font "Source Han Sans SC" 18
 for_window [title="Volume Control"] floating enable
 # for_window [title="Telegram \(\d*\)"] floating enable
+for_window [shell="xwayland"] title_format "[XWayland] %title"
 output eDP-1 {
     # scale 1.5
     background @wallpaper@ stretch
@@ -278,3 +279,5 @@ workspace 2
 exec $browser
 workspace 1
 exec $term
+
+exec_always xrdb ~/.Xresources

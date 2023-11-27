@@ -327,7 +327,7 @@
 
       ## Utility
       nicpkgs.screenshot pavucontrol nicpkgs.kitty firefox
-      gnome.nautilus dex swaylock nicpkgs.rofi nicpkgs.waybar wl-clipboard nicpkgs.mako
+      gnome.nautilus dex swaylock nicpkgs.rofi nicpkgs.waybar wl-clipboard nicpkgs.mako xorg.xrdb
       gnome.adwaita-icon-theme swayimg acpilight alsa-utils
 
       ## Multimedia
@@ -335,7 +335,7 @@
       yesplaymusic
 
       ## Document
-      libreoffice calibre
+      libreoffice # calibre
 
       ## Game
       prismlauncher # lutris openttd minecraft fabric-installer
