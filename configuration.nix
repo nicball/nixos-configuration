@@ -209,7 +209,7 @@
     interfaces.wlo1.useDHCP = true;
 
     # Disable IPV6 temp address
-    tempAddresses = "disabled";
+    # tempAddresses = "disabled";
 
     # DNS
     # nameservers = [ "8.8.4.4" "8.8.8.8" ];
