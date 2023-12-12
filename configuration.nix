@@ -181,6 +181,9 @@
   # Steam
   programs.steam.enable = true;
 
+  # kde-connect
+  programs.kdeconnect.enable = true;
+
   # Time zone
   time.timeZone = "Asia/Shanghai";
   # Compatible with Windows
@@ -212,7 +215,7 @@
     # tempAddresses = "disabled";
 
     # DNS
-    # nameservers = [ "8.8.4.4" "8.8.8.8" ];
+    # nameservers = [ "8.8.4.4" "8.8.8.8" "2001:4860:4860::8888" "2001:4860:4860::8844" ];
     # hosts = {
     #     "202.38.64.59" = [ "wlt.ustc.edu.cn" "wlt" ];
     # };
