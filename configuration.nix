@@ -42,7 +42,7 @@
   boot.kernelPackages = pkgs.linuxPackages_6_5;
 
   ## For realtek wifi
-  boot.extraModulePackages = [ (nicpkgs.rtw89.override { kernel = config.boot.kernelPackages.kernel; }) ];
+  boot.extraModulePackages = [ (nicpkgs.rtw89.override { linux = config.boot.kernelPackages.kernel; }) ];
   # hardware.enableRedistributableFirmware = true;
 
   # AMD PState
@@ -391,7 +391,7 @@
   # };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 80 7890 ];
+  networking.firewall.allowedTCPPorts = [ 16363 ];
   #   25565 8123 # mc
   #   # 1935 # owncast
   #   9090 # clash
