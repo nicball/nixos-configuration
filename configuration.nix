@@ -39,7 +39,7 @@
   '';
 
   ## For keyboard patch
-  boot.kernelPackages = pkgs.linuxPackages_6_5;
+  boot.kernelPackages = pkgs.linuxPackages_6_6;
 
   ## For realtek wifi
   boot.extraModulePackages = [ (pkgs.rtw89.override { linux = config.boot.kernelPackages.kernel; }) ];
@@ -195,7 +195,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.clash}/bin/clash -f ${./private/clash.yaml} -d /var/clash > /dev/null 2>&1";
+      ExecStart = "${pkgs.clash-meta}/bin/clash-meta -f ${./private/clash.yaml} -d /var/clash > /dev/null 2>&1";
     };
   };
 
@@ -314,7 +314,7 @@
       file wget zip unzip neofetch jq screen unar pv rsync aria2 ffmpeg
 
       # system tools
-      clash cachix
+      cachix
       htop cpufrequtils parted lm_sensors sysstat usbutils pciutils smartmontools
       iw wirelesstools libva-utils vdpauinfo xdg-utils lsof traceroute iperf
       ryzenadj radeontop powertop stress-ng
