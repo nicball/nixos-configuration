@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, nicpkgs, niclib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -42,7 +42,7 @@
   boot.kernelPackages = pkgs.linuxPackages_6_5;
 
   ## For realtek wifi
-  boot.extraModulePackages = [ (nicpkgs.rtw89.override { linux = config.boot.kernelPackages.kernel; }) ];
+  boot.extraModulePackages = [ (pkgs.rtw89.override { linux = config.boot.kernelPackages.kernel; }) ];
   # hardware.enableRedistributableFirmware = true;
 
   # AMD PState
@@ -304,21 +304,20 @@
     [
       # dev
       man-pages man-pages-posix
-      nicpkgs.kakoune gcc gdb jdk gnumake
-      # nicpkgs.emacs ripgrep # direnv nix-direnv
-      # (pkgs.agda.withPackages (p: [ p.standard-library ]))
+      kakoune gcc gdb jdk gnumake
+      # (agda.withPackages (p: [ p.standard-library ]))
 
       # i3
       # polybarFull xclip maim dmenu
 
       # cli tools
-      file wget zip unzip neofetch jq screen unar pv rsync nicpkgs.aria2 ffmpeg
+      file wget zip unzip neofetch jq screen unar pv rsync aria2 ffmpeg
 
       # system tools
       clash cachix
       htop cpufrequtils parted lm_sensors sysstat usbutils pciutils smartmontools
       iw wirelesstools libva-utils vdpauinfo xdg-utils lsof traceroute iperf
-      nicpkgs.ryzenadj radeontop powertop stress-ng
+      ryzenadj radeontop powertop stress-ng
 
       # emulators
       wineWowPackages.stable xorg.xhost qemu
@@ -329,8 +328,8 @@
       # GUI stuff
 
       ## Utility
-      nicpkgs.screenshot pavucontrol nicpkgs.kitty firefox
-      gnome.nautilus dex swaylock nicpkgs.rofi nicpkgs.waybar wl-clipboard nicpkgs.mako xorg.xrdb
+      screenshot pavucontrol kitty firefox
+      gnome.nautilus dex swaylock rofi-wayland waybar wl-clipboard mako xorg.xrdb
       gnome.adwaita-icon-theme swayimg acpilight alsa-utils
 
       ## Multimedia

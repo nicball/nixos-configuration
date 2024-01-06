@@ -12,11 +12,8 @@
       modules = [
         ./configuration.nix
         lanzaboote.nixosModules.lanzaboote
+        ({ ... }: { nixpkgs.overlays = [ nicpkgs.overlays.default ]; })
       ];
-      specialArgs = {
-        niclib = nicpkgs.niclib.${system};
-        nicpkgs = nicpkgs.packages.${system};
-      };
     };
   };
 }
