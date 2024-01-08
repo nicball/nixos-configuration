@@ -44,6 +44,7 @@
   ## For realtek wifi
   boot.extraModulePackages = [ (pkgs.rtw89.override { linux = config.boot.kernelPackages.kernel; }) ];
   # hardware.enableRedistributableFirmware = true;
+  boot.blacklistedKernelModules = [ "rtw89_8852be" ];
 
   # AMD PState
   powerManagement.cpuFreqGovernor = "powersave";
