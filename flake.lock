@@ -148,11 +148,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1704715484,
-        "narHash": "sha256-MvC5Y2EXxZ8ySAhPgZkMtzYjYLCDL9aMOpjplUsv0MI=",
+        "lastModified": 1705680687,
+        "narHash": "sha256-6thFXkt2FtPbNOkokw78RAN9tHCHyKWsWH700TwKn24=",
         "owner": "nicball",
         "repo": "nicpkgs",
-        "rev": "9cd2e47edc7aa0c643e2bb117f8d8da33f41eeba",
+        "rev": "f9ba24026c7792f0f2d0dbc6908025abe181205b",
         "type": "github"
       },
       "original": {
