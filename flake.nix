@@ -13,6 +13,13 @@
         ./configuration.nix
         lanzaboote.nixosModules.lanzaboote
         ({ ... }: { nixpkgs.overlays = [ nicpkgs.overlays.default ]; })
+        ({ ... }: {
+          nix.nixPath = [
+            "nixpkgs=${nixpkgs}"
+            "nicpkgs=${nicpkgs}"
+            "nixos-config=${./.}"
+          ];
+        })
       ];
     };
   };
