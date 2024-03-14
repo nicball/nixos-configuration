@@ -100,6 +100,28 @@
   # Do nothing when closing the lid with wall power
   services.logind.lidSwitchExternalPower = "ignore";
 
+  # KDE
+  #services.desktopManager.plasma6.enable = true;
+  #services.xserver.enable = true;
+  #services.xserver.displayManager.sddm = {
+  #  enable = true;
+  #  wayland.enable = true;
+  #};
+
+  # Greetd
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd fish";
+      };
+      initial_session = {
+        command = "sway";
+        user = "nicball";
+      };
+    };
+  };
+
   # Sway
   programs.sway = {
     enable = true;
@@ -112,10 +134,13 @@
         };
       in
       [ "'--config ${sway-config}'" ];
+      extraPackages = with pkgs; [ screenshot pavucontrol gnome.nautilus dex swaylock rofi-wayland waybar swayimg xorg.xrdb mako acpilight alsa-utils gnome.adwaita-icon-theme ];
   };
   xdg = {
     portal.wlr.enable = true;
   };
+  environment.variables.QT_WAYLAND_FORCE_DPI = "144";
+  nixpkgs.overlays = [ (self: super: { nicpkgs-scale = 1.5; }) ];
 
   # Input methods
   i18n.inputMethod = {
@@ -164,16 +189,16 @@
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
-  };
-  environment.etc = {
-    "wireplumber/bluetooth.lua.d/51-bluez-config.lua".text = ''
-      bluez_monitor.properties = {
-        ["bluez5.enable-sbc-xq"] = true,
-        ["bluez5.enable-msbc"] = true,
-        ["bluez5.enable-hw-volume"] = true,
-        ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
-      }
-    '';
+    wireplumber.configPackages = [
+      (pkgs.writeTextDir "share/wireplumber/bluetooth.lua.d/51-bluez-config.lua" ''
+        bluez_monitor.properties = {
+          ["bluez5.enable-sbc-xq"] = true,
+          ["bluez5.enable-msbc"] = true,
+          ["bluez5.enable-hw-volume"] = true,
+          ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
+        }
+      '')
+    ];
   };
   hardware.bluetooth = {
     enable = true;
@@ -271,20 +296,6 @@
   # Fish shell
   programs.fish.enable = true;
 
-  # Greetd
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd fish";
-      };
-      initial_session = {
-        command = "sway";
-        user = "nicball";
-      };
-    };
-  };
-
   # Man pages for devs
   documentation.dev.enable = true;
 
@@ -324,14 +335,13 @@
       wineWowPackages.stable xorg.xhost qemu
 
       # documents
-      graphviz pandoc # texlive.combined.scheme-full
+      graphviz pandoc foliate # texlive.combined.scheme-full
 
       # GUI stuff
 
       ## Utility
-      screenshot pavucontrol kitty firefox
-      gnome.nautilus dex swaylock rofi-wayland waybar wl-clipboard mako xorg.xrdb
-      gnome.adwaita-icon-theme swayimg acpilight alsa-utils
+      kitty firefox
+      wl-clipboard
 
       ## Multimedia
       mpv obs-studio # tigervnc
@@ -345,14 +355,8 @@
     ];
 
   # Default Applications
-  environment.variables = {
-      EDITOR = "kak";
-      BROWSER = "firefox";
-      QT_WAYLAND_FORCE_DPI = "144";
-  };
-  xdg.mime.defaultApplications = {
-    "application/epub+zip" = "calibre-ebook-viewer.desktop";
-  };
+  environment.variables.EDITOR = "kak";
+  environment.variables.BROWSER = "firefox";
 
   # Docker
   virtualisation.docker.enable = true;
