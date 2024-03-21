@@ -76,9 +76,10 @@ output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_19
         natural_scroll enabled
     }
 
-    # input "type:keyboard" {
+    input "type:keyboard" {
     #     xkb_options ctrl:swapcaps
-    # }
+      repeat_rate 25
+    }
 
 ### Key bindings
 #
