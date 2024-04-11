@@ -5,19 +5,17 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./cachix.nix
-      ./secureboot.nix
-      ./misc-software.nix
-      ./lenovo.nix
-      ./amd.nix
-      ./desktop.nix
-      ./network.nix
-      ./private/passwords.nix
-    ];
-
+  imports = [
+    ./hardware-configuration.nix
+    ./cachix.nix
+    ./secureboot.nix
+    ./misc-software.nix
+    ./lenovo.nix
+    ./amd.nix
+    ./desktop.nix
+    ./network.nix
+    ./private/passwords.nix
+  ];
 
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -36,7 +34,7 @@
     createHome = false;
     home = "/home/nicball";
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "docker" "kvm" "networkmanager" ];
+    extraGroups = [ "wheel" "docker" "kvm" "networkmanager" "wireshark" ];
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCxtyU71qMEWzYBaa5aQzGCRlRsERuzc2sFshGA3tWewv3UfcZca27yQTGQnMCvqmObL4+zl0SikUTbQX7Pi4vo7U42EADdWJ4nHJ+/4kJ3s7xtYnlJAdkuS/fDZYsjDLxqEBMR5GCgtPvE8K2A3siBHW837J0fb8SuH7hUe0QnibCeHFPlNuY2OEAZBkUDsXhBz0jDd3D2rg7W1ALdHl+zFt+SimF4H0jOOssF893XfjXZw9C9DLbs0pKeWBJ8cMAf0ZSRFBcJMiiOqUbJQP0QyzVnwfJVX5WsAsebouClwK+tc7txX04BuJqefJbQ1t58cFFYwLQQKDCWwI5smNxqBVhjDSNf1i4ggmcIgaAnV6WWpV30+uObWWLQfox2zkNcxA0k6jkOfoJhkOjxRSFy588GNAstsXd6TgmaZI85RwAM1R9mO7FNrKGaEwpWjclaaml2/ZvnuaYW8mO0bySpYJPACk7O7hgj97BkJGlHdVixR9DSBnBVzHZ2ppQtsqM= nicball"
     ];
@@ -53,12 +51,6 @@
     auto-optimise-store = true;
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.11"; # Did you read the comment?
+  system.stateVersion = "21.11";
 
 }

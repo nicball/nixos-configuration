@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # Flatpak
@@ -17,6 +17,9 @@
 
   # Fish shell
   programs.fish.enable = true;
+
+  # WireShark
+  programs.wireshark.enable = true;
 
   # Man pages for devs
   documentation.dev.enable = true;
@@ -45,7 +48,7 @@
       # polybarFull xclip maim dmenu
 
       # cli tools
-      file wget zip unzip neofetch jq screen unar pv rsync aria2 ffmpeg
+      file wget zip unzip neofetch jq screen unar pv rsync aria2 ffmpeg fd ripgrep
 
       # system tools
       cachix
@@ -54,7 +57,7 @@
       powertop stress-ng
 
       # emulators
-      wineWowPackages.stable xorg.xhost qemu
+      wineWowPackages.unstableFull winetricks xorg.xhost qemu
 
       # documents
       graphviz pandoc foliate # texlive.combined.scheme-full
@@ -73,7 +76,7 @@
       libreoffice # calibre
 
       ## Game
-      prismlauncher # lutris openttd minecraft fabric-installer
+      gamescope prismlauncher # lutris openttd minecraft fabric-installer
     ];
 
   # Default Applications
@@ -83,4 +86,5 @@
   # Docker
   virtualisation.docker.enable = true;
   virtualisation.docker.daemon.settings = { registry-mirrors = [ "https://docker.mirrors.ustc.edu.cn/" ]; };
+
 }

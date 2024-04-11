@@ -4,14 +4,6 @@
   # Do nothing when closing the lid with wall power
   services.logind.lidSwitchExternalPower = "ignore";
 
-  # KDE
-  #services.desktopManager.plasma6.enable = true;
-  #services.xserver.enable = true;
-  #services.xserver.displayManager.sddm = {
-  #  enable = true;
-  #  wayland.enable = true;
-  #};
-
   # Greetd
   services.greetd = {
     enable = true;
@@ -38,7 +30,7 @@
         };
       in
       [ "'--config ${sway-config}'" ];
-      extraPackages = with pkgs; [ screenshot pavucontrol gnome.nautilus dex swaylock rofi-wayland waybar swayimg xorg.xrdb mako acpilight alsa-utils gnome.adwaita-icon-theme ];
+      extraPackages = with pkgs; [ screenshot pavucontrol dex swaylock rofi-wayland waybar swayimg xorg.xrdb mako acpilight alsa-utils gnome.adwaita-icon-theme gnome.nautilus ];
   };
   xdg = {
     portal.wlr.enable = true;
