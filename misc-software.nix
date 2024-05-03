@@ -57,7 +57,7 @@
       powertop stress-ng
 
       # emulators
-      wineWowPackages.unstableFull winetricks xorg.xhost qemu
+      wineWowPackages.waylandFull winetricks xorg.xhost qemu
 
       # documents
       graphviz pandoc foliate # texlive.combined.scheme-full

@@ -18,11 +18,13 @@
           for i in /sys/devices/system/cpu/cpufreq/policy*; do
             echo power > $i/energy_performance_preference
           done
+          echo low-power > /sys/firmware/acpi/platform_profile
         ;;
         00000001)
           for i in /sys/devices/system/cpu/cpufreq/policy*; do
             echo performance > $i/energy_performance_preference
           done
+          echo balanced > /sys/firmware/acpi/platform_profile
         ;;
       esac
     '';
@@ -33,10 +35,12 @@
         for i in /sys/devices/system/cpu/cpufreq/policy*; do
           echo power > $i/energy_performance_preference
         done
+        echo low-power > /sys/firmware/acpi/platform_profile
       else
         for i in /sys/devices/system/cpu/cpufreq/policy*; do
           echo performance > $i/energy_performance_preference
         done
+        echo balanced > /sys/firmware/acpi/platform_profile
       fi
     '';
     in {
