@@ -1,5 +1,6 @@
 {
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/ad57eef4ef0659193044870c731987a6df5cf56b";
     nicpkgs.url = "github:nicball/nicpkgs";
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
@@ -12,12 +13,12 @@
       modules = [
         ./configuration.nix
         lanzaboote.nixosModules.lanzaboote
-        ({ ... }: { nixpkgs.overlays = [ nicpkgs.overlays.default ]; })
         ({ ... }: {
+          nixpkgs.overlays = [ nicpkgs.overlays.default ];
           nix.nixPath = [
-            "nixpkgs=${nixpkgs}"
             "nicpkgs=${nicpkgs}"
             "nixos-config=${./.}"
+            "nixpkgs=flake:nixpkgs"
           ];
         })
       ];

@@ -1,4 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+
+let set-perf-level = level: assert (lib.assertOneOf "set-perf-level" level [ 1 0 ]); ''
+  for i in /sys/devices/system/cpu/cpufreq/policy*; do
+    echo ${if level == 1 then "performance" else "power"} > $i/energy_performance_preference
+  done
+  echo ${if level == 1 then "balanced" else "low-power"} > /sys/firmware/acpi/platform_profile
+'';
+in
 
 {
   # AMD PState
@@ -15,16 +23,10 @@
       vals=($1)
       case ''${vals[3]} in
         00000000)
-          for i in /sys/devices/system/cpu/cpufreq/policy*; do
-            echo power > $i/energy_performance_preference
-          done
-          echo low-power > /sys/firmware/acpi/platform_profile
+          ${set-perf-level 0}
         ;;
         00000001)
-          for i in /sys/devices/system/cpu/cpufreq/policy*; do
-            echo performance > $i/energy_performance_preference
-          done
-          echo balanced > /sys/firmware/acpi/platform_profile
+          ${set-perf-level 1}
         ;;
       esac
     '';
@@ -32,15 +34,9 @@
   systemd.services.auto-set-epp =
     let script = pkgs.writeShellScript "auto-set-epp.sh" ''
       if ${pkgs.acpi}/bin/acpi -a | grep off-line > /dev/null; then
-        for i in /sys/devices/system/cpu/cpufreq/policy*; do
-          echo power > $i/energy_performance_preference
-        done
-        echo low-power > /sys/firmware/acpi/platform_profile
+        ${set-perf-level 0}
       else
-        for i in /sys/devices/system/cpu/cpufreq/policy*; do
-          echo performance > $i/energy_performance_preference
-        done
-        echo balanced > /sys/firmware/acpi/platform_profile
+        ${set-perf-level 1}
       fi
     '';
     in {

@@ -51,31 +51,26 @@
     font-awesome_5
     mononoki
     julia-mono
+    monaco-ttf
   ];
   # Prefer Simplified Chinese Fonts
+  fonts.fontconfig.defaultFonts = {
+    serif = [ "DejaVu Serif" "Source Han Serif SC" ];
+    sansSerif = [ "DejaVu Sans" "Source Han Sans SC" ];
+    monospace = [ "Monaco" "DejaVu Sans Mono" "Source Han Sans SC" ];
+  };
   fonts.fontconfig.localConf = ''
+    <?xml version="1.0"?>
+    <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
     <fontconfig>
-      <alias>
-        <family>sans-serif</family>
-        <prefer>
-          <family>DejaVu Sans</family>
-          <family>Source Han Sans SC</family>
-        </prefer>
-      </alias>
-      <alias>
-        <family>monospace</family>
-        <prefer>
-          <family>DejaVu Sans Mono</family>
-          <family>Source Han Sans SC</family>
-        </prefer>
-      </alias>
-      <alias>
-        <family>serif</family>
-        <prefer>
-          <family>DejaVu Serif</family>
-          <family>Source Han Serif SC</family>
-        </prefer>
-      </alias>
+      <match target="scan">
+        <test name="family">
+          <string>Monaco</string>
+        </test>
+        <edit name="spacing">
+          <int>90</int>
+        </edit>
+      </match>
     </fontconfig>
   '';
 
