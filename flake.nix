@@ -1,6 +1,5 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/ad57eef4ef0659193044870c731987a6df5cf56b";
     nicpkgs.url = "github:nicball/nicpkgs";
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
@@ -20,11 +19,9 @@
             "nixos-config=${./.}"
             "nixpkgs=flake:nixpkgs"
           ];
-          nix.registry.nixpkgs.to = {
-            type = "github";
-            owner = "NixOS";
-            repo = "nixpkgs";
-            inherit ((builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.nixpkgs.locked) rev;
+          nixpkgs.flake = {
+            setFlakeRegistry = false;
+            setNixPath = false;
           };
         })
       ];
