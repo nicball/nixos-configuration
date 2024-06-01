@@ -20,6 +20,12 @@
             "nixos-config=${./.}"
             "nixpkgs=flake:nixpkgs"
           ];
+          nix.registry.nixpkgs.to = {
+            type = "github";
+            owner = "NixOS";
+            repo = "nixpkgs";
+            inherit ((builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.nixpkgs.locked) rev;
+          };
         })
       ];
     };
