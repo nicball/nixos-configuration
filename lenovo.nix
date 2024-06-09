@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ lib, pkgs, config, ... }:
 
 {
   # Switch CapsLock and Left Ctrl
@@ -10,10 +10,12 @@
   '';
 
   ## For keyboard patch
-  boot.kernelPackages = pkgs.linuxPackages_6_6;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   ## For realtek wifi
-  boot.extraModulePackages = [ (pkgs.rtw89.override { linux = config.boot.kernelPackages.kernel; }) ];
+  boot.extraModulePackages = [
+    (pkgs.rtw89.override { linux = config.boot.kernelPackages.kernel; })
+  ];
   # hardware.enableRedistributableFirmware = true;
   boot.blacklistedKernelModules = [ "rtw89_8852be" ];
 }

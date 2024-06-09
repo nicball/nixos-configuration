@@ -292,3 +292,8 @@ layer_effects "waybar" {
   corner_radius 26
   shadows enable
 }
+layer_effects "notifications" {
+  blur enable
+  corner_radius 26
+  shadows enable
+}

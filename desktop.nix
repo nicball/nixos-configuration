@@ -12,7 +12,7 @@
         command = "${pkgs.greetd.greetd}/bin/agreety --cmd fish";
       };
       initial_session = {
-        command = "sway";
+        command = "dbus-run-session -- sway";
         user = "nicball";
       };
     };
