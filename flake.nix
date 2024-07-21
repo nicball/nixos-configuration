@@ -5,25 +5,19 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = { self, nixpkgs, nicpkgs, lanzaboote, ... }: {
+  outputs = { self, nixpkgs, nicpkgs, lanzaboote, nix-index-database, ... }: {
     nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
       modules = [
         ./configuration.nix
         lanzaboote.nixosModules.lanzaboote
-        ({ ... }: {
-          nixpkgs.overlays = [ nicpkgs.overlays.default ];
-          nix.nixPath = [
-            "nicpkgs=${nicpkgs}"
-            "nixos-config=${./.}"
-            "nixpkgs=flake:nixpkgs"
-          ];
-          nixpkgs.flake = {
-            setFlakeRegistry = false;
-            setNixPath = false;
-          };
-        })
+        nicpkgs.nixosModules.all
+        nix-index-database.nixosModules.nix-index
       ];
     };
   };

@@ -148,16 +148,36 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1717918580,
-        "narHash": "sha256-zuTeT+cZxULI1DeaIamRnGhFMXXd818tcuMvZty8lGA=",
+        "lastModified": 1720147534,
+        "narHash": "sha256-35PcNmm9rUzuBsIgotjwxQy1bJBqtfHPp0ci0yChOwg=",
         "owner": "nicball",
         "repo": "nicpkgs",
-        "rev": "d05b4ab16529ed36eb72c5e6236484d6f17759c3",
+        "rev": "4fa8d766d2b596cd89c7b77d4c63d49fa9dd05ca",
         "type": "github"
       },
       "original": {
         "owner": "nicball",
         "repo": "nicpkgs",
+        "type": "github"
+      }
+    },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1719832725,
+        "narHash": "sha256-dr8DkeS74KVNTgi8BE0BiUKALb+EKlMIV86G2xPYO64=",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "rev": "2917972ed34ce292309b3a4976286f8b5c08db27",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-index-database",
         "type": "github"
       }
     },
@@ -240,6 +260,7 @@
       "inputs": {
         "lanzaboote": "lanzaboote",
         "nicpkgs": "nicpkgs",
+        "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2"
       }
     },

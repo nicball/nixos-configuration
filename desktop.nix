@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 
 {
   # Do nothing when closing the lid with wall power
@@ -31,13 +31,39 @@
         };
       in
       [ "'--config ${sway-config}'" ];
-      extraPackages = with pkgs; [ screenshot pavucontrol dex swaylock rofi-wayland waybar swayimg xorg.xrdb mako acpilight alsa-utils gnome.adwaita-icon-theme gnome.nautilus ];
+      extraPackages = with pkgs; [
+        screenshot pavucontrol dex swaylock rofi-wayland waybar swayimg xorg.xrdb mako acpilight alsa-utils gnome.adwaita-icon-theme gnome.nautilus glib
+      ];
   };
   xdg = {
     portal.wlr.enable = true;
   };
+
+  # Scaling
   environment.variables.QT_WAYLAND_FORCE_DPI = "144";
-  nixpkgs.overlays = lib.mkAfter [ (self: super: { nicpkgs-scale = 1.5; }) ];
+  nic.scale-factor = 1.5;
+  programs.dconf.enable = true;
+  programs.dconf.profiles.user.databases = [
+    {
+      settings = with lib.gvariant; {
+        "org/gnome/desktop/interface" = {
+          cursor-size = mkInt32 (builtins.ceil (24 * config.nic.scale-factor));
+          cursor-theme = mkString "Adwaita";
+          text-scaling-factor = mkDouble config.nic.scale-factor;
+        };
+      };
+    }
+  ];
+
+  # Steam
+  programs.steam = {
+    enable = true;
+    package = pkgs.steam.override { extraArgs = "-forcedesktopscaling ${toString config.nic.scale-factor}"; };
+    fontPackages = with pkgs; [ source-han-sans ];
+  };
+
+  # kde-connect
+  programs.kdeconnect.enable = true;
 
   # Input methods
   i18n.inputMethod = {
@@ -52,7 +78,6 @@
     font-awesome_5
     mononoki
     julia-mono
-    monaco-ttf
   ];
   # Prefer Simplified Chinese Fonts
   fonts.fontconfig.defaultFonts = {
@@ -60,20 +85,20 @@
     sansSerif = [ "DejaVu Sans" "Source Han Sans SC" ];
     monospace = [ "Monaco" "DejaVu Sans Mono" "Source Han Sans SC" ];
   };
-  fonts.fontconfig.localConf = ''
-    <?xml version="1.0"?>
-    <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-    <fontconfig>
-      <match target="scan">
-        <test name="family">
-          <string>Monaco</string>
-        </test>
-        <edit name="spacing">
-          <int>90</int>
-        </edit>
-      </match>
-    </fontconfig>
-  '';
+  # fonts.fontconfig.localConf = ''
+  #   <?xml version="1.0"?>
+  #   <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+  #   <fontconfig>
+  #     <match target="scan">
+  #       <test name="family">
+  #         <string>Monaco</string>
+  #       </test>
+  #       <edit name="spacing">
+  #         <int>90</int>
+  #       </edit>
+  #     </match>
+  #   </fontconfig>
+  # '';
 
   # Sound
   security.rtkit.enable = true;

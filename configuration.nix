@@ -12,6 +12,7 @@
     ./misc-software.nix
     ./lenovo.nix
     ./amd.nix
+    ./hexcore.nix
     ./desktop.nix
     ./network.nix
     ./private/passwords.nix

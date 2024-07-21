@@ -49,4 +49,5 @@ in
       };
     };
   environment.systemPackages = with pkgs; [ ryzenadj radeontop ];
+  hardware.opengl.extraPackages = [ pkgs.rocmPackages.clr.icd ];
 }

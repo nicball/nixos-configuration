@@ -227,13 +227,13 @@ bar {
 include /etc/sway/config.d/*
 
 bindsym $mod+c exec $browser
-bindsym $mod+Shift+f exec nautilus
+bindsym $mod+Alt+f exec nautilus
 bindsym Print exec screenshot
 bindsym Control+Print exec screenshot --full
 bindsym Shift+Print exec screenshot --save
 bindsym Control+Shift+Print exec screenshot --full --save
-bindsym $mod+alt+g exec env -u http_proxy -u https_proxy steam -forcedesktopscaling 1.5
-bindsym $mod+alt+l exec swaylock
+bindsym $mod+Alt+g exec steam
+bindsym $mod+Alt+l exec swaylock
 bindcode 121       exec amixer sset Master 0%
 bindcode 122       exec amixer sset Master 5%-
 bindsym $mod+minus exec amixer sset Master 5%-

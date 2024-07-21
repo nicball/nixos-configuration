@@ -7,12 +7,6 @@
   # NTFS support
   boot.supportedFilesystems = [ "ntfs" ];
 
-  # Steam
-  programs.steam.enable = true;
-
-  # kde-connect
-  programs.kdeconnect.enable = true;
-
   security.sudo.wheelNeedsPassword = false;
 
   # Fish shell
@@ -34,6 +28,9 @@
       };
     };
   };
+
+  # Cross compiling
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # Apps
   environment.systemPackages =
