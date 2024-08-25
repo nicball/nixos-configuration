@@ -247,21 +247,22 @@ bindsym $mod+t input type:touchpad events disabled
 bindsym $mod+Shift+t input type:touchpad events enabled
 bindsym $mod+y input 1:1:AT_Translated_Set_2_keyboard events disabled
 bindsym $mod+Shift+y input 1:1:AT_Translated_Set_2_keyboard events enabled
-bindsym F1       exec $term
-bindsym F2       exec $browser
-bindsym F3       exec $menu
-bindsym F4       kill
-bindsym Shift+F5 move scratchpad
-bindsym F5       scratchpad show
-bindsym F6       floating toggle
-bindsym Shift+F6 sticky toggle
-bindsym F7       move container to workspace trash
-bindsym Shift+F7 workspace trash
-bindsym F8       fullscreen
-bindsym F9       layout toggle split
-bindsym F10      layout stacking
-bindsym F11      layout tabbed
-bindsym F12      focus parent
+bindsym F1        exec $term
+bindsym F2        exec $browser
+bindsym F3        exec $menu
+bindsym F4        kill
+bindsym Shift+F5  move scratchpad
+bindsym F5        scratchpad show
+bindsym F6        floating toggle
+bindsym Shift+F6  sticky toggle
+bindsym F7        move container to workspace trash
+bindsym Shift+F7  workspace trash
+bindsym F8        fullscreen
+bindsym F9        layout toggle split
+bindsym F10       layout stacking
+bindsym F11       layout tabbed
+bindsym F12       focus parent
+bindsym Shift+F12 focus mode_toggle
 # Theme colors
 # class                 border  backgr. text    indicator child_border
 client.focused          #3b4252 #4c566a #eceff4 #5e81ac #5e81ac
@@ -302,7 +303,7 @@ exec_always xrdb ~/.Xresources
 
 # swayfx
 blur enable
-corner_radius 26
+corner_radius 15
 shadows enable
 layer_effects "waybar" {
   blur enable
@@ -311,6 +312,6 @@ layer_effects "waybar" {
 }
 layer_effects "notifications" {
   blur enable
-  corner_radius 26
+  corner_radius 15
   shadows enable
 }
