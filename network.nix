@@ -57,7 +57,12 @@
   #   }; };
   # };
 
-  networking.firewall.allowedTCPPorts = [ 16363 ];
+  networking.firewall.allowedTCPPorts = [
+    47989 47984 48010  # sunshine
+  ];
+  networking.firewall.allowedUDPPorts = [
+    47998 47999 48000 # sunshine
+  ];
   #   25565 8123 # mc
   #   # 1935 # owncast
   #   9090 # clash

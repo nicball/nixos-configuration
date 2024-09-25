@@ -8,7 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./cachix.nix
-    ./secureboot.nix
+    # ./secureboot.nix
     ./misc-software.nix
     ./lenovo.nix
     ./amd.nix
@@ -19,6 +19,7 @@
   ];
 
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = true;
 
   # Time zone
   time.timeZone = "Asia/Shanghai";
