@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let set-perf-level = level: assert (lib.assertOneOf "set-perf-level" level [ 1 0 ]); ''
   for i in /sys/devices/system/cpu/cpufreq/policy*; do
@@ -49,5 +49,5 @@ in
       };
     };
   environment.systemPackages = with pkgs; [ ryzenadj radeontop ];
-  hardware.opengl.extraPackages = [ pkgs.rocmPackages.clr.icd ];
+  hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
 }

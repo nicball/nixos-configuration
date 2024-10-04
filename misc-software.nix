@@ -12,6 +12,14 @@
   # Fish shell
   programs.fish.enable = true;
 
+  # Zsh
+  # programs.zsh = {
+  #   enable = true;
+  #   autosuggestions.enable = true;
+  #   syntaxHighlighting.enable = true;
+  #   ohMyZsh.enable = true;
+  # };
+
   # WireShark
   programs.wireshark.enable = true;
 

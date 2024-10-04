@@ -42,9 +42,9 @@
     ];
   };
   users.users.wine = {
-      isNormalUser = true;
-      home = "/home/wine";
-      shell = pkgs.fish;
+    isNormalUser = true;
+    home = "/home/wine";
+    shell = pkgs.fish;
   };
 
   # Nix flakes
