@@ -28,6 +28,10 @@
         sway-config = pkgs.substituteAll {
             src = ./sway-config;
             wallpaper = ./wallpaper.png;
+            xresources = pkgs.writeText ".Xresources" ''
+              Xft.dpi: ${toString (builtins.ceil (96 * config.nic.scale-factor))}
+              Xcursor.size: ${toString (builtins.ceil (24 * config.nic.scale-factor))}
+            '';
         };
       in
       [ "'--config ${sway-config}'" ];

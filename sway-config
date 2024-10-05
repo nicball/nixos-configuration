@@ -300,7 +300,7 @@ exec $browser
 workspace 1
 exec $term
 
-exec_always xrdb ~/.Xresources
+exec_always xrdb @xresources@
 
 # swayfx
 blur enable
