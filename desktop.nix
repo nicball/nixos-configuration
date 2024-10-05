@@ -2,14 +2,23 @@
 
 {
   imports = [
-    ./sway.nix
+    ./window-managers.nix
     # ./kde.nix
   ];
+
+  nic.window-managers = {
+    enable = true;
+    niri.enable = true;
+    # sway.enable = true;
+    scaling = {
+      enable = true;
+      factor = 1.5;
+    };
+  };
 
   # Steam
   programs.steam = {
     enable = true;
-    package = pkgs.steam.override { extraArgs = "-forcedesktopscaling ${toString config.nic.scale-factor}"; };
     fontPackages = with pkgs; [ source-han-sans ];
     extraCompatPackages = [ pkgs.proton-ge-bin ];
   };

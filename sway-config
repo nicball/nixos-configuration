@@ -236,11 +236,10 @@ bindsym Shift+Print exec screenshot --save
 bindsym Control+Shift+Print exec screenshot --full --save
 bindsym $mod+Alt+g exec env -u http_proxy -u https_proxy steam
 bindsym $mod+Alt+l exec swaylock
-bindcode 121       exec amixer sset Master 0%
-bindcode 122       exec amixer sset Master 5%-
-bindsym $mod+minus exec amixer sset Master 5%-
-bindcode 123       exec amixer sset Master 5%+
-bindsym $mod+equal exec amixer sset Master 5%+
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-
+bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute     exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 bindcode 232 exec sudo xbacklight -5
 bindcode 233 exec sudo xbacklight +5
 bindsym $mod+t input type:touchpad events disabled
@@ -263,7 +262,8 @@ bindsym F10       layout stacking
 bindsym F11       layout tabbed
 bindsym F12       focus parent
 bindsym Shift+F12 focus mode_toggle
-# Theme colors
+
+# looks
 # class                 border  backgr. text    indicator child_border
 client.focused          #3b4252 #4c566a #eceff4 #5e81ac #5e81ac
 client.focused_inactive #3b4252 #434c5e #eceff4 #434c5e #434c5e
@@ -284,9 +284,11 @@ output eDP-1 {
     background @wallpaper@ stretch
     adaptive_sync on
 }
+# workspace_auto_back_and_forth yes
+
+# auto shut screen
 bindswitch --reload --locked lid:on output eDP-1 dpms off
 bindswitch --reload --locked lid:off output eDP-1 dpms on
-# workspace_auto_back_and_forth yes
 
 mode passthru {
     bindsym $mod+p mode default
@@ -299,6 +301,14 @@ workspace 2
 exec $browser
 workspace 1
 exec $term
+
+# gestures
+bindgesture swipe:3:right workspace prev
+bindgesture swipe:3:left workspace next
+bindgesture pinch:2:inward+up move up
+bindgesture pinch:2:inward+down move down
+bindgesture pinch:2:inward+left move left
+bindgesture pinch:2:inward+right move right
 
 exec_always xrdb @xresources@
 
