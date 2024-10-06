@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./window-managers.nix
     # ./kde.nix
   ];
 
@@ -13,8 +12,18 @@
     scaling = {
       enable = true;
       factor = 1.5;
+      cursor.enable = true;
     };
+    wallpaper = ./wallpaper.png;
   };
+  nic.waybar.enable = true;
+  nic.greetd.enable = true;
+
+  # Kitty
+  nic.kitty.enable = true;
+
+  # Notifications
+  nic.dunst.enable = true;
 
   # Steam
   programs.steam = {
@@ -86,4 +95,26 @@
   #     </match>
   #   </fontconfig>
   # '';
+
+  # misc programs
+  environment.systemPackages = with pkgs; [
+    # GUI stuff
+
+    ## Utility
+    firefox
+    wl-clipboard
+
+    ## Multimedia
+    mpv obs-studio # tigervnc
+    yesplaymusic foliate
+
+    ## Document
+    libreoffice # calibre
+
+    ## Game
+    gamescope prismlauncher # lutris openttd minecraft fabric-installer
+  ];
+
+  # Default Applications
+  environment.variables.BROWSER = "firefox";
 }

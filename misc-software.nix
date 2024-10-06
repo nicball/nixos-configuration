@@ -65,28 +65,11 @@
       wineWowPackages.waylandFull winetricks xorg.xhost qemu
 
       # documents
-      graphviz pandoc foliate # texlive.combined.scheme-full
-
-      # GUI stuff
-
-      ## Utility
-      kitty firefox
-      wl-clipboard
-
-      ## Multimedia
-      mpv obs-studio # tigervnc
-      yesplaymusic
-
-      ## Document
-      libreoffice # calibre
-
-      ## Game
-      gamescope prismlauncher # lutris openttd minecraft fabric-installer
+      graphviz pandoc # texlive.combined.scheme-full
     ];
 
   # Default Applications
   environment.variables.EDITOR = "kak";
-  environment.variables.BROWSER = "firefox";
 
   # Docker
   virtualisation.docker.enable = true;
