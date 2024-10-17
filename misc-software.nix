@@ -26,6 +26,9 @@
   # Man pages for devs
   documentation.dev.enable = true;
 
+  # Kakoune
+  nic.kakoune.enable = true;
+
   # Git
   programs.git = {
     enable = true;
@@ -46,7 +49,7 @@
     [
       # dev
       man-pages man-pages-posix
-      kakoune gcc gdb jdk gnumake
+      gcc gdb jdk gnumake
       # (agda.withPackages (p: [ p.standard-library ]))
 
       # i3

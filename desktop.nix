@@ -32,6 +32,9 @@
     extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
 
+  # Keyboard driver
+  nic.hexcore-link.enable = true;
+
   # kde-connect
   # programs.kdeconnect.enable = true;
 
@@ -41,7 +44,7 @@
     enable = true;
     fcitx5 = {
       addons = with pkgs; [ fcitx5-rime ];
-      # waylandFrontend = true;
+      waylandFrontend = true;
     };
   };
 

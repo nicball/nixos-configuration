@@ -16,7 +16,7 @@
       modules = [
         ./configuration.nix
         # lanzaboote.nixosModules.lanzaboote
-        nicpkgs.nixosModules.all
+        nicpkgs.nixosModules.default
         nix-index-database.nixosModules.nix-index
       ];
     };
