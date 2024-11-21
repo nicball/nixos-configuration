@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  programs.ydotool = {
+    enable = true;
+    group = "users";
+  };
+
   # Flatpak
   services.flatpak.enable = true;
 

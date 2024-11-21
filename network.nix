@@ -34,8 +34,8 @@
     #     "202.38.64.59" = [ "wlt.ustc.edu.cn" "wlt" ];
     # };
     dhcpcd.extraConfig = ''
-        # nohook resolv.conf
-        release
+      # nohook resolv.conf
+      release
     '';
 
     # Wireless

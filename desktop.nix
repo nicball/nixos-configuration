@@ -14,10 +14,19 @@
       factor = 1.5;
       cursor.enable = true;
     };
-    wallpaper = ./wallpaper.png;
+    wallpaper = {
+      enable = true;
+      source = ./wallpaper.png;
+    };
   };
   nic.waybar.enable = true;
-  nic.greetd.enable = true;
+  nic.greetd = {
+    enable = true;
+    auto-login = {
+      enable = true;
+      user = "nicball";
+    };
+  };
 
   # Kitty
   nic.kitty.enable = true;
@@ -54,20 +63,14 @@
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
-    # wireplumber.configPackages = [
-    #   (pkgs.writeTextDir "share/wireplumber/bluetooth.lua.d/51-bluez-config.lua" ''
-    #     bluez_monitor.properties = {
-    #       ["bluez5.enable-sbc-xq"] = true,
-    #       ["bluez5.enable-msbc"] = true,
-    #       ["bluez5.enable-hw-volume"] = true,
-    #       ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
-    #     }
-    #   '')
-    # ];
+    wireplumber.extraConfig = {
+      disable-headset = {
+        "wireplumber.settings"."bluetooth.autoswitch-to-headset-profile" = false;
+        "monitor.bluez.properties"."bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
+      };
+    };
   };
-  hardware.bluetooth = {
-    enable = true;
-  };
+  hardware.bluetooth.enable = true;
 
   # Fonts
   fonts.packages = with pkgs; [
