@@ -13,9 +13,9 @@
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
   ## For realtek wifi
-  boot.extraModulePackages = [
-    (pkgs.rtw89.override { linux = config.boot.kernelPackages.kernel; })
-  ];
+  # boot.extraModulePackages = [
+  #   (pkgs.rtw89.override { linux = config.boot.kernelPackages.kernel; })
+  # ];
   # hardware.enableRedistributableFirmware = true;
-  boot.blacklistedKernelModules = [ "rtw89_8852be" ];
+  # boot.blacklistedKernelModules = [ "rtw89_8852be" ];
 }

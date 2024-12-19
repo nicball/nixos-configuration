@@ -7,8 +7,8 @@
 
   nic.window-managers = {
     enable = true;
-    niri.enable = true;
-    # sway.enable = true;
+    # niri.enable = true;
+    sway.enable = true;
     scaling = {
       enable = true;
       factor = 1.5;
@@ -18,6 +18,7 @@
       enable = true;
       source = ./wallpaper.png;
     };
+    browser = "zen";
   };
   nic.waybar.enable = true;
   nic.greetd = {
@@ -107,7 +108,8 @@
     # GUI stuff
 
     ## Utility
-    firefox
+    zen-browser
+    # firefox
     wl-clipboard
 
     ## Multimedia
@@ -120,7 +122,4 @@
     ## Game
     gamescope prismlauncher # lutris openttd minecraft fabric-installer
   ];
-
-  # Default Applications
-  environment.variables.BROWSER = "firefox";
 }

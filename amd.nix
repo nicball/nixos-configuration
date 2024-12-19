@@ -1,11 +1,12 @@
 { config, pkgs, lib, ... }:
 
-let set-perf-level = level: assert (lib.assertOneOf "set-perf-level" level [ 1 0 ]); ''
-  for i in /sys/devices/system/cpu/cpufreq/policy*; do
-    echo ${if level == 1 then "performance" else "power"} > $i/energy_performance_preference
-  done
-  echo ${if level == 1 then "balanced" else "low-power"} > /sys/firmware/acpi/platform_profile
-'';
+let
+  set-perf-level = level: assert (lib.assertOneOf "set-perf-level" level [ 1 0 ]); ''
+    for i in /sys/devices/system/cpu/cpufreq/policy*; do
+      echo ${if level == 1 then "performance" else "power"} > $i/energy_performance_preference
+    done
+    echo ${if level == 1 then "balanced" else "low-power"} > /sys/firmware/acpi/platform_profile
+  '';
 in
 
 {

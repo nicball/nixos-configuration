@@ -9,7 +9,22 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.clash-meta}/bin/clash-meta -f ${./private/clash.yaml} -d /var/clash > /dev/null 2>&1";
+      ExecStart = "${pkgs.clash-meta}/bin/clash-meta -f ${./private/clash.yaml} -d /var/lib/clash > /dev/null 2>&1";
+      DynamicUser = true;
+      StateDirectory = "clash";
+      WorkingDirectory = "/var/lib/clash";
+      NoNewPrivileges = true;
+      PrivateTmp = true;
+      PrivateDevices = true;
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      ProtectControlGroups = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      RestrictAddressFamilies = [ "AF_UNIX" "AF_INET" "AF_INET6" "AF_NETLINK" ];
+      RestrictRealtime = true;
+      RestrictNamespaces = true;
+      MemoryDenyWriteExecute = true;
     };
   };
 
