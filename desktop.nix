@@ -18,7 +18,7 @@
       enable = true;
       source = ./wallpaper.png;
     };
-    browser = "zen";
+    browser = "firefox";
   };
   nic.waybar.enable = true;
   nic.greetd = {
@@ -108,13 +108,14 @@
     # GUI stuff
 
     ## Utility
-    zen-browser
-    # firefox
+    # zen-browser
+    firefox
     wl-clipboard
 
     ## Multimedia
     mpv obs-studio # tigervnc
-    yesplaymusic foliate
+    # yesplaymusic
+    foliate
 
     ## Document
     libreoffice # calibre

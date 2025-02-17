@@ -23,7 +23,7 @@
   # Time zone
   time.timeZone = "Asia/Shanghai";
   # Compatible with Windows
-  time.hardwareClockInLocalTime = true;
+  # time.hardwareClockInLocalTime = true;
 
   # Nix channels
   nix.settings.substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" "https://cache.nixos.org/" ];
