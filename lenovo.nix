@@ -10,7 +10,7 @@
   '';
 
   ## For keyboard patch
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  # boot.kernelPackages = pkgs.linuxPackages_zen;
 
   ## For realtek wifi
   # boot.extraModulePackages = [

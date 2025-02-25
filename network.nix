@@ -9,7 +9,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.clash-meta}/bin/clash-meta -f ${./private/clash.yaml} -d /var/lib/clash > /dev/null 2>&1";
+      ExecStart = "${pkgs.clash-meta}/bin/clash-meta -f ${./private/clash.yaml} -d /var/lib/clash";
       DynamicUser = true;
       StateDirectory = "clash";
       WorkingDirectory = "/var/lib/clash";

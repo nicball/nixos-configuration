@@ -11,8 +11,13 @@ in
 
 {
   # AMD PState
-  powerManagement.cpuFreqGovernor = "powersave";
-  boot.kernelModules = [ "amd_pstate" ];
+  powerManagement = {
+    cpuFreqGovernor = "powersave";
+    # cpufreq = {
+    #   max = 4400000;
+    #   min = 400000;
+    # };
+  };
   boot.kernelParams = [
     "initcall_blacklist=acpi_cpufreq_init"
     "amd_pstate=active"
