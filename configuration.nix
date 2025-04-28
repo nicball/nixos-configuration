@@ -10,7 +10,6 @@
     ./cachix.nix
     # ./secureboot.nix
     ./misc-software.nix
-    ./lenovo.nix
     ./amd.nix
     ./desktop.nix
     ./network.nix
@@ -19,6 +18,7 @@
 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Time zone
   time.timeZone = "Asia/Shanghai";

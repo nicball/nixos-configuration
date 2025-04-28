@@ -14,46 +14,63 @@ in
   powerManagement = {
     cpuFreqGovernor = "powersave";
     # cpufreq = {
-    #   max = 4400000;
+    #   max = 4000000;
     #   min = 400000;
     # };
   };
   boot.kernelParams = [
     "initcall_blacklist=acpi_cpufreq_init"
     "amd_pstate=active"
-    "iomem=relaxed" # for ryzenadj
+    # "iomem=relaxed" # for ryzenadj
+    # "amdgpu.ppfeaturemask=0xffffffff" # gpu overclock
   ];
-  services.acpid = {
+  # services.acpid = {
+  #   enable = true;
+  #   acEventCommands = ''
+  #     vals=($1)
+  #     case ''${vals[3]} in
+  #       00000000)
+  #         ${set-perf-level 0}
+  #       ;;
+  #       00000001)
+  #         ${set-perf-level 1}
+  #       ;;
+  #     esac
+  #   '';
+  # };
+  # systemd.services.auto-set-epp =
+  #   let script = pkgs.writeShellScript "auto-set-epp.sh" ''
+  #     if ${pkgs.acpi}/bin/acpi -a | grep off-line > /dev/null; then
+  #       ${set-perf-level 0}
+  #     else
+  #       ${set-perf-level 1}
+  #     fi
+  #   '';
+  #   in {
+  #     description = "Automatically set AMD PState EPP on startup";
+  #     wantedBy = [ "multi-user.target" ];
+  #     after = [ "cpufreq.service" ];
+  #     serviceConfig = {
+  #       ExecStart = script;
+  #       Type = "oneshot";
+  #     };
+  #   };
+  environment.systemPackages = with pkgs; [ radeontop lact ];
+  systemd.packages = [ pkgs.lact ];
+  systemd.services.lactd.wantedBy = [ "multi-user.target" ];
+  hardware.graphics.extraPackages = [ pkgs.mesa.opencl ];
+  # hardware.amdgpu.initrd.enable = true;
+  boot.kernelModules = [ "nct6687" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ nct6687d ];
+
+  systemd.services.fancontrol = {
     enable = true;
-    acEventCommands = ''
-      vals=($1)
-      case ''${vals[3]} in
-        00000000)
-          ${set-perf-level 0}
-        ;;
-        00000001)
-          ${set-perf-level 1}
-        ;;
-      esac
-    '';
-  };
-  systemd.services.auto-set-epp =
-    let script = pkgs.writeShellScript "auto-set-epp.sh" ''
-      if ${pkgs.acpi}/bin/acpi -a | grep off-line > /dev/null; then
-        ${set-perf-level 0}
-      else
-        ${set-perf-level 1}
-      fi
-    '';
-    in {
-      description = "Automatically set AMD PState EPP on startup";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "cpufreq.service" ];
-      serviceConfig = {
-        ExecStart = script;
-        Type = "oneshot";
-      };
+    wantedBy = [ "multi-user.target" ];
+    description = "Adjust case fans in relation to max temp of CPU and GPU.";
+    serviceConfig = {
+      ExecStart = pkgs.writeShellScript "fancontrol" (builtins.readFile ./fancontrol.sh);
+      Restart = "on-failure";
     };
-  environment.systemPackages = with pkgs; [ ryzenadj radeontop ];
-  hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
+  };
+
 }

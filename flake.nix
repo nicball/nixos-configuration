@@ -11,7 +11,7 @@
     };
   };
   outputs = { self, nixpkgs, nicpkgs, nix-index-database, ... }: {
-    nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem rec {
+    nixosConfigurations.nixos-desktop = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
       modules = [
         ./configuration.nix

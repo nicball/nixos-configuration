@@ -127,6 +127,6 @@
     libreoffice # calibre
 
     ## Game
-    gamescope prismlauncher # lutris openttd minecraft fabric-installer
+    uudeck prismlauncher # lutris gamescope openttd minecraft fabric-installer
   ];
 }

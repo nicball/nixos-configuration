@@ -30,15 +30,15 @@
 
   # Network
   networking = {
-    hostName = "nixos-laptop";
+    hostName = "nixos-desktop";
 
     proxy.httpProxy = "http://127.0.0.1:7890";
     proxy.httpsProxy = "http://127.0.0.1:7890";
     proxy.noProxy = "127.0.0.1,localhost";
 
     useDHCP = false;
-    interfaces.enp2s0.useDHCP = true;
-    interfaces.wlo1.useDHCP = true;
+    interfaces.enp6s0.useDHCP = true;
+    interfaces.wlp8s0.useDHCP = true;
 
     # Disable IPV6 temp address
     # tempAddresses = "disabled";
