@@ -1,3 +1,8 @@
+enable sleep
+
+histlen=5
+interval=5
+
 intake=/sys/devices/platform/nct6687.2592/hwmon/hwmon*/pwm5
 outtake=/sys/devices/platform/nct6687.2592/hwmon/hwmon*/pwm3
 gputemp=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon*/temp1_input
@@ -10,17 +15,32 @@ autoctl() {
 
 trap autoctl EXIT
 
+avg() {
+  local len=$#
+  local sum=0
+  local i
+  for i; do
+    sum=$(( sum + i ))
+  done
+  echo $(( sum / len ))
+}
+
 echo 1 > ${intake}_enable
 echo 1 > ${outtake}_enable
 
+hist=()
+
 while true; do
-  tg=$(( $(cat $gputemp) / 1000 ))
-  tc=$(( $(cat $cputemp) / 1000 ))
-  input=$(( tg > tc ? tg : tc ))
-  output=$(( input >= 80 ? (128 + (input - 80) * (255 - 128) / (100 - 80)) :
-             input >= 60 ? (50 + (input - 60) * (128 - 50) / (80 - 60)) :
-             50 ))
-  echo $output > $intake
-  echo $output > $outtake
-  sleep 5
+  currg=$(( $(cat $gputemp) / 1000 ))
+  currc=$(( $(cat $cputemp) / 1000 ))
+  max=$(( currg > currc ? currg : currc ))
+  hist=( ${hist[@]} $max )
+  if [[ ${#hist[@]} -gt $histlen ]]; then
+    hist=( ${hist[@]: -$histlen} )
+  fi
+  temp=$(avg ${hist[@]})
+  speed=$(( temp >= 60 ? ((temp - 60) * 255 / (100 - 60)) : 0 ))
+  echo $speed > $intake
+  echo $speed > $outtake
+  sleep $interval
 done

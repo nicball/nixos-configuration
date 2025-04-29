@@ -66,7 +66,7 @@ in
   systemd.services.fancontrol = {
     enable = true;
     wantedBy = [ "multi-user.target" ];
-    description = "Adjust case fans in relation to max temp of CPU and GPU.";
+    description = "fancontrol - Adjust case fans in relation to max temp of CPU and GPU";
     serviceConfig = {
       ExecStart = pkgs.writeShellScript "fancontrol" (builtins.readFile ./fancontrol.sh);
       Restart = "on-failure";
