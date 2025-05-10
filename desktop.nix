@@ -14,12 +14,15 @@
   nic.window-managers = {
     enable = true;
     # niri.enable = true;
-    sway.enable = true;
+    sway = {
+      enable = true;
+      use-swayfx = true;
+    };
     scaling = {
       enable = true;
       factor = 1.5;
-      cursor.enable = true;
     };
+    cursor-size = 32;
     wallpaper = {
       enable = true;
       source = ./wallpaper.png;
