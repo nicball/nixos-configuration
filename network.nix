@@ -36,9 +36,9 @@
     proxy.httpsProxy = "http://127.0.0.1:7890";
     proxy.noProxy = "127.0.0.1,localhost";
 
-    useDHCP = false;
-    interfaces.enp6s0.useDHCP = true;
-    interfaces.wlp8s0.useDHCP = true;
+    useDHCP = true;
+    # interfaces.enp8s0.useDHCP = true;
+    # interfaces.wlp10s0.useDHCP = true;
 
     # Disable IPV6 temp address
     # tempAddresses = "disabled";

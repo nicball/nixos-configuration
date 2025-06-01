@@ -22,7 +22,7 @@ in
     "initcall_blacklist=acpi_cpufreq_init"
     "amd_pstate=active"
     # "iomem=relaxed" # for ryzenadj
-    # "amdgpu.ppfeaturemask=0xffffffff" # gpu overclock
+    "amdgpu.ppfeaturemask=0xffffffff" # gpu overclock
   ];
   # services.acpid = {
   #   enable = true;
@@ -58,7 +58,7 @@ in
   environment.systemPackages = with pkgs; [ radeontop lact ];
   systemd.packages = [ pkgs.lact ];
   systemd.services.lactd.wantedBy = [ "multi-user.target" ];
-  hardware.graphics.extraPackages = [ pkgs.mesa.opencl ];
+  hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
   # hardware.amdgpu.initrd.enable = true;
   boot.kernelModules = [ "nct6687" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ nct6687d ];

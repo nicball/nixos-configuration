@@ -3,10 +3,29 @@ enable sleep
 histlen=5
 interval=5
 
-intake=/sys/devices/platform/nct6687.2592/hwmon/hwmon*/pwm5
-outtake=/sys/devices/platform/nct6687.2592/hwmon/hwmon*/pwm3
-gputemp=/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon*/temp1_input
-cputemp=/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon*/temp3_input
+gpupath="/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0"
+mbpath="/sys/devices/platform/nct6687.2592"
+cpupath="/sys/devices/pci0000:00/0000:00:18.3"
+
+intake="$mbpath"/hwmon/hwmon*/pwm5
+outtake="$mbpath"/hwmon/hwmon*/pwm3
+gputemp="$gpupath"/hwmon/hwmon*/temp2_input
+cputemp="$cpupath"/hwmon/hwmon*/temp3_input
+
+if [[ $(cat "$gpupath"/vendor) != 0x1002 ]] || [[ $(cat "$gpupath"/device) != 0x731f ]]; then
+  echo 'GPU path changed, quitting...'
+  exit 1
+fi
+
+if [[ $(cat "$cpupath"/vendor) != 0x1022 ]] || [[ $(cat "$cpupath"/device) != 0x14e3 ]]; then
+  echo 'CPU path changed, quitting...'
+  exit 1
+fi
+
+if ! [[ -d "$mbpath" ]]; then
+  echo 'Motherboard sensors not found, quitting...'
+  exit 1
+fi
 
 autoctl() {
   echo 99 > ${intake}_enable
@@ -39,7 +58,7 @@ while true; do
     hist=( ${hist[@]: -$histlen} )
   fi
   temp=$(avg ${hist[@]})
-  speed=$(( temp >= 60 ? ((temp - 60) * 255 / (100 - 60)) : 0 ))
+  speed=$(( temp >= 50 ? ((temp - 60) * 255 / (100 - 60)) : 0 ))
   echo $speed > $intake
   echo $speed > $outtake
   sleep $interval
