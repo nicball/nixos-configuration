@@ -7,7 +7,8 @@
   systemd.services.clash = {
     description = "Clash Daemon";
     wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    after = [ "network-online.target" ];
+    requires = [ "network-online.target" ];
     serviceConfig = {
       ExecStart = "${pkgs.clash-meta}/bin/clash-meta -f ${./private/clash.yaml} -d /var/lib/clash";
       DynamicUser = true;

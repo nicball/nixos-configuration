@@ -58,7 +58,7 @@ while true; do
     hist=( ${hist[@]: -$histlen} )
   fi
   temp=$(avg ${hist[@]})
-  speed=$(( temp >= 50 ? ((temp - 60) * 255 / (100 - 60)) : 0 ))
+  speed=$(( temp >= 55 ? ((temp - 55) * (128 - 77) / (100 - 55) + 77) : 77 ))
   echo $speed > $intake
   echo $speed > $outtake
   sleep $interval

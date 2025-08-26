@@ -25,7 +25,7 @@
     cursor-size = 32;
     wallpaper = {
       enable = true;
-      source = ./wallpaper.png;
+      source = ./wallpaper.jpg;
     };
     browser = "firefox";
   };
