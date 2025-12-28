@@ -6,6 +6,9 @@
     group = "users";
   };
 
+  # Run executables that expect FHS
+  programs.nix-ld.enable = true;
+
   # Flatpak
   services.flatpak.enable = true;
 
@@ -26,7 +29,7 @@
   # };
 
   # WireShark
-  programs.wireshark.enable = true;
+  # programs.wireshark.enable = true;
 
   # Man pages for devs
   documentation.dev.enable = true;
@@ -54,7 +57,7 @@
     [
       # dev
       man-pages man-pages-posix
-      gcc gdb jdk gnumake
+      gcc gdb jdk gnumake racket
       # (agda.withPackages (p: [ p.standard-library ]))
 
       # i3
@@ -70,7 +73,7 @@
       powertop stress-ng
 
       # emulators
-      wineWowPackages.stagingFull winetricks xorg.xhost qemu umu-launcher
+      wineWowPackages.waylandFull winetricks xorg.xhost qemu
 
       # documents
       graphviz pandoc # texlive.combined.scheme-full

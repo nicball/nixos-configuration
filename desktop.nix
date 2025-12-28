@@ -116,20 +116,26 @@
   environment.systemPackages = with pkgs; [
     # GUI stuff
 
-    ## Utility
+    # Utility
     # zen-browser
     firefox
     wl-clipboard
+    google-chrome
 
-    ## Multimedia
+    # Social
+    telegram-desktop
+    element-desktop
+    qq
+
+    # Multimedia
     mpv obs-studio # tigervnc
     # yesplaymusic
     foliate
 
-    ## Document
+    # Document
     libreoffice # calibre
 
-    ## Game
-    uudeck prismlauncher # lutris gamescope openttd minecraft fabric-installer
+    # Game
+    uudeck prismlauncher umu-launcher # lutris gamescope openttd minecraft fabric-installer
   ];
 }
