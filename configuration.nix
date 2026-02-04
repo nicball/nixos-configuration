@@ -14,6 +14,7 @@
     ./desktop.nix
     ./network.nix
     ./private/passwords.nix
+    ./brightness.nix
   ];
 
   boot.loader.efi.canTouchEfiVariables = true;
