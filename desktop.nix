@@ -14,10 +14,11 @@
   nic.window-managers = {
     enable = true;
     # niri.enable = true;
-    sway = {
-      enable = true;
-      use-swayfx = true;
-    };
+    # sway = {
+    #   enable = true;
+    #   use-swayfx = true;
+    # };
+    hyprland.enable = true;
     scaling = {
       enable = true;
       factor = 1.5;
@@ -25,7 +26,7 @@
     cursor-size = 32;
     wallpaper = {
       enable = true;
-      source = ./wallpaper.jpg;
+      source = ./wallpaper.png;
     };
     browser = "firefox";
   };
@@ -121,6 +122,7 @@
     firefox
     wl-clipboard
     google-chrome
+    bitwarden-desktop
 
     # Social
     telegram-desktop
@@ -133,7 +135,7 @@
     foliate
 
     # Document
-    libreoffice # calibre
+    # libreoffice # calibre
 
     # Game
     uudeck prismlauncher umu-launcher # lutris gamescope openttd minecraft fabric-installer

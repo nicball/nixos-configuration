@@ -5,7 +5,7 @@
     #   url = "github:nix-community/lanzaboote";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    nixpkgs.url = "github:NixOS/nixpkgs/cf3f5c4def3c7b5f1fc012b3d839575dbe552d43";
+    nixpkgs.url = "github:NixOS/nixpkgs/dd9b079222d43e1943b6ebd802f04fd959dc8e61";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
