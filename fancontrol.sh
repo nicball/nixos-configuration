@@ -12,6 +12,10 @@ outtake="$mbpath"/hwmon/hwmon*/pwm3
 gputemp="$gpupath"/hwmon/hwmon*/temp2_input
 cputemp="$cpupath"/hwmon/hwmon*/temp3_input
 
+minspeed=55
+maxspeed=128
+mintemp=55
+
 if [[ $(cat "$gpupath"/vendor) != 0x1002 ]] || [[ $(cat "$gpupath"/device) != 0x731f ]]; then
   echo 'GPU path changed, quitting...'
   exit 1
@@ -58,7 +62,7 @@ while true; do
     hist=( ${hist[@]: -$histlen} )
   fi
   temp=$(avg ${hist[@]})
-  speed=$(( temp >= 55 ? ((temp - 55) * (128 - 77) / (100 - 55) + 77) : 77 ))
+  speed=$(( temp >= mintemp ? (minspeed + (maxspeed - minspeed) * (temp - mintemp) / (100 - mintemp)) : minspeed ))
   echo $speed > $intake
   echo $speed > $outtake
   sleep $interval

@@ -140,4 +140,7 @@
     # Game
     uudeck prismlauncher umu-launcher # lutris gamescope openttd minecraft fabric-installer
   ];
+
+  services.gnome.gnome-keyring.enable = true;
+
 }
